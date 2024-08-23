@@ -8,12 +8,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    maxWidth: 360,
-    // background: theme.palette.background.paper,
-  },
+const useStyles = makeStyles(() => ({
+  item: {
+    minWidth:500,
+    height:50
+  }
 }));
 
 export default function Todos() {
@@ -34,20 +33,19 @@ export default function Todos() {
   };
 
   return (
-    <List className={classes.root}
+    <List
       sx={{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center', // 让列表项居中
-        justifyContent : 'center'
       }}
-      width="100%"
     >
       {[0, 1, 2, 3].map((value) => {
         const labelId = `checkbox-list-label-${value}`;
-
         return (
-          <ListItem key={value} role={undefined} dense button onClick={handleToggle(value)}>
+          <ListItem key={value} role={undefined} dense button onClick={handleToggle(value)} 
+          className={classes.item}
+          >
             <ListItemIcon>
               <Checkbox
                 edge="start"
@@ -57,7 +55,7 @@ export default function Todos() {
                 inputProps={{ 'aria-labelledby': labelId }}
               />
             </ListItemIcon>
-            <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+            <ListItemText id={labelId} primary={`Todo ${value + 1}`} />
             <ListItemSecondaryAction>
               <IconButton edge="end" aria-label="comments">
               </IconButton>
