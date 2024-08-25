@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -16,31 +16,56 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
+// mock data
+const TodoData = {
+  Todos: [
+    { TodoId: '001', text: '吃饭', createTime: 10, done: false },
+    { TodoId: '002', text: '睡觉', createTime: 20, done: false },
+    { TodoId: '003', text: '学习', createTime: 80, done: false },
+    { TodoId: '004', text: '跳舞', createTime: 30, done: false },
+  ]
+}
+
 export default function Todos() {
+
   const classes = useStyles();
-  const [checked, setChecked] = React.useState([0]);
-  const [isHovering, setIsHovering] = React.useState(false)
+  const [chosenId, setchosenId] = React.useState(-1)
+  const [data, setData] = React.useState([])
 
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
+  useEffect(() => {
+    setData(orderTodos(TodoData.Todos))
+  },[])
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
+  //获取按创建时间排序的Todos
+  const orderTodos = (Todos) => {
+    return Todos.sort((o1, o2) => {
+      return o1.createTime <= o2.createTime ? -1 : 1;
+    })
+  }
 
-    setChecked(newChecked);
+  // 处理点击效果
+  const handleToggle = (TodoId) => () => {
+    let newData = data.map((el) => {
+      if(el.TodoId === TodoId) return {...el, done:!el.done}
+      return el
+    })
+    setData(newData)
   };
 
-  const handleMouseOver = () => {
-    setIsHovering(true)
+  // 处理悬浮效果
+  const handleMouseOver = (id) => () => {
+    setchosenId(id)
+  }
+  const handleMouseOut = () => () => {
+    setchosenId(-1)
   }
 
-  const handleMouseOut = () => {
-    setIsHovering(false)
-  }
+  // 新增功能
+
+  // 删除功能
+
+  // 删除已完成任务功能
+
 
   return (
     <List
@@ -50,28 +75,29 @@ export default function Todos() {
         alignItems: 'center', // 让列表项居中
       }}
     >
-      {[0, 1, 2, 3].map((value) => {
-        const labelId = `checkbox-list-label-${value}`;
+      {data.map((value) => {
+        const labelId = `checkbox-list-label-${value.TodoId}`;
         return (
-          <ListItem key={value} role={undefined} dense button onClick={handleToggle(value)}
+          <ListItem key={value.TodoId} role={undefined} dense button
             className={classes.item}
-            onMouseOver={handleMouseOver}
-            onMouseOut={handleMouseOut}
+            onMouseOver={handleMouseOver(value.TodoId)}
+            onMouseOut={handleMouseOut()}
           >
 
             <ListItemIcon>
               <Checkbox
                 edge="start"
-                checked={checked.indexOf(value) !== -1}
+                checked={value.done}
                 tabIndex={-1}
                 disableRipple
                 inputProps={{ 'aria-labelledby': labelId }}
+                onClick={handleToggle(value.TodoId)}
               />
             </ListItemIcon>
 
-            <ListItemText id={labelId} primary={`Todo ${value + 1}`} />
+            <ListItemText id={labelId} primary={value.text} />
 
-            {isHovering &&
+            {(chosenId === value.TodoId) &&
               (<Button
                 variant="contained"
                 color="secondary"
