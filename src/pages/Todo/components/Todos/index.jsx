@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -8,10 +8,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
+import PubSub from 'pubsub-js'
+
 
 const useStyles = makeStyles(() => ({
   item: {
-    minWidth: 500,
+    width: 200,
     height: 50
   }
 }));
@@ -31,10 +33,16 @@ export default function Todos() {
   const classes = useStyles();
   const [chosenId, setchosenId] = React.useState(-1)
   const [data, setData] = React.useState([])
+  const [receivedMessage, setReceivedMessage] = useState('');
 
   useEffect(() => {
     setData(orderTodos(TodoData.Todos))
-  },[])
+
+    PubSub.subscribe('new_todo_data', (_, data) => {
+      setReceivedMessage(data);
+    });
+
+  },[receivedMessage])
 
   //获取按创建时间排序的Todos
   const orderTodos = (Todos) => {
@@ -61,6 +69,9 @@ export default function Todos() {
   }
 
   // 新增功能
+  const addTodo = () => {
+    data.unshift(receivedMessage)
+  }
 
   // 删除功能
 
@@ -71,8 +82,8 @@ export default function Todos() {
     <List
       sx={{
         display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center', // 让列表项居中
+        flexDirection: 'column'
+        // alignItems: 'center', // 让列表项居中
       }}
     >
       {data.map((value) => {

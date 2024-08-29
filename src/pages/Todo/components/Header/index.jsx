@@ -1,7 +1,27 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
+import { nanoid } from 'nanoid';
+import PubSub from 'pubsub-js'
 
 export default function Header() {
+
+    const handleKeyDown = (event) => {
+        if(event.key !== 'Enter') return
+
+        const text = event.target.value
+        const id = nanoid()
+        const textFiled = document.getElementById('outlined-full-width')
+        textFiled.value = ''
+        
+        const data = {
+            TodoId:id,
+            Text:text,
+            createTime: Date.now(),
+            done:false
+        }
+
+        PubSub.publish('new_todo_data', data)
+    }
 
     return (
         <>
@@ -17,6 +37,7 @@ export default function Header() {
                         shrink: true,
                     }}
                     variant="outlined"
+                    onKeyDown={handleKeyDown}
                 />
             </div>
             
