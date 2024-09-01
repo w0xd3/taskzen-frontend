@@ -9,11 +9,11 @@ import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import PubSub from 'pubsub-js'
-
+import { Box } from '@mui/system';
 
 const useStyles = makeStyles(() => ({
   item: {
-    width: 200,
+    width: 600,
     height: 50
   }
 }));
@@ -32,29 +32,24 @@ export default function Todos() {
 
   const classes = useStyles();
   const [chosenId, setchosenId] = React.useState(-1)
-  const [data, setData] = React.useState([])
-  const [receivedMessage, setReceivedMessage] = useState('');
+  const [data, setData] = React.useState(TodoData.Todos)
 
   useEffect(() => {
-    setData(orderTodos(TodoData.Todos))
 
-    PubSub.subscribe('new_todo_data', (_, data) => {
-      setReceivedMessage(data);
+    PubSub.subscribe('new_todo_data', (_, todo) => {
+      if (todo.text.trim() === '') return
+
+      const n_data = [todo, ...data];
+      setData(n_data);
+      console.log(data)
     });
 
-  },[receivedMessage])
-
-  //获取按创建时间排序的Todos
-  const orderTodos = (Todos) => {
-    return Todos.sort((o1, o2) => {
-      return o1.createTime <= o2.createTime ? -1 : 1;
-    })
-  }
+  }, [data])
 
   // 处理点击效果
   const handleToggle = (TodoId) => () => {
     let newData = data.map((el) => {
-      if(el.TodoId === TodoId) return {...el, done:!el.done}
+      if (el.TodoId === TodoId) return { ...el, done: !el.done }
       return el
     })
     setData(newData)
@@ -64,67 +59,90 @@ export default function Todos() {
   const handleMouseOver = (id) => () => {
     setchosenId(id)
   }
-  const handleMouseOut = () => () => {
+  const handleMouseOut = () => {
     setchosenId(-1)
   }
 
-  // 新增功能
-  const addTodo = () => {
-    data.unshift(receivedMessage)
-  }
-
   // 删除功能
+  const deleteTodo = (id) => () => {
+    setData(data.filter((e) => {
+      if (e.TodoId !== id) return e
+    })
+    )
+  }
 
   // 删除已完成任务功能
 
 
   return (
-    <List
-      sx={{
-        display: 'flex',
-        flexDirection: 'column'
-        // alignItems: 'center', // 让列表项居中
-      }}
-    >
-      {data.map((value) => {
-        const labelId = `checkbox-list-label-${value.TodoId}`;
-        return (
-          <ListItem key={value.TodoId} role={undefined} dense button
-            className={classes.item}
-            onMouseOver={handleMouseOver(value.TodoId)}
-            onMouseOut={handleMouseOut()}
-          >
-
-            <ListItemIcon>
-              <Checkbox
-                edge="start"
-                checked={value.done}
-                tabIndex={-1}
-                disableRipple
-                inputProps={{ 'aria-labelledby': labelId }}
-                onClick={handleToggle(value.TodoId)}
-              />
-            </ListItemIcon>
-
-            <ListItemText id={labelId} primary={value.text} />
-
-            {(chosenId === value.TodoId) &&
-              (<Button
-                variant="contained"
-                color="secondary"
-                size='small'
+    <>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center', // 水平居中
+        }}
+      >
+        <List
+          sx={{
+            flexDirection: 'column',
+            // alignItems: 'center', // 让列表项居中
+            // justifyContent: 'center', // 水平居中
+            width: '550px',
+            height: '100px',
+          }}
+        >
+          {data.map((value) => {
+            const labelId = `checkbox-list-label-${value.TodoId}`;
+            return (
+              <ListItem key={value.TodoId} role={undefined} dense button
+                className={classes.item}
+                onMouseOver={handleMouseOver(value.TodoId)}
+                onMouseOut={handleMouseOut}
               >
-                Delete
-              </Button>)
-            }
 
-            <ListItemSecondaryAction>
-              <IconButton edge="end" aria-label="comments">
-              </IconButton>
-            </ListItemSecondaryAction>
-          </ListItem>
-        );
-      })}
-    </List>
+                <ListItemIcon>
+                  <Checkbox
+                    edge="start"
+                    checked={value.done}
+                    tabIndex={-1}
+                    disableRipple
+                    inputProps={{ 'aria-labelledby': labelId }}
+                    onClick={handleToggle(value.TodoId)}
+                  />
+                </ListItemIcon>
+
+                <ListItemText id={labelId} primary={value.text} />
+
+                {(chosenId === value.TodoId) &&
+                  (<Button
+                    variant="contained"
+                    color="secondary"
+                    size='small'
+                    onClick={deleteTodo(value.TodoId)}
+                  >
+                    Delete
+                  </Button>)
+                }
+
+                <ListItemSecondaryAction>
+                  <IconButton edge="end" aria-label="comments">
+                  </IconButton>
+                </ListItemSecondaryAction>
+              </ListItem>
+            );
+          })}
+        </List>
+      </Box>
+
+      {/* TODO */}
+      {/* <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center', // 水平居中
+        }}
+      >
+        <Button variant="contained" color="secondary">删除已完成</Button>
+      </Box> */}
+    </>
   );
 }
