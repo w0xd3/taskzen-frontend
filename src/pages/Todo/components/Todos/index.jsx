@@ -72,7 +72,12 @@ export default function Todos() {
   }
 
   // 删除已完成任务功能
-
+  const deleteDone = () => {
+    setData(data.filter((e) => {
+      if (!e.done) return e
+    })
+    )
+  }
 
   return (
     <>
@@ -88,7 +93,6 @@ export default function Todos() {
             // alignItems: 'center', // 让列表项居中
             // justifyContent: 'center', // 水平居中
             width: '550px',
-            height: '100px',
           }}
         >
           {data.map((value) => {
@@ -135,14 +139,14 @@ export default function Todos() {
       </Box>
 
       {/* TODO */}
-      {/* <Box
+      <Box
         sx={{
           display: 'flex',
           justifyContent: 'center', // 水平居中
         }}
       >
-        <Button variant="contained" color="secondary">删除已完成</Button>
-      </Box> */}
+        <Button variant="contained" color="secondary" onClick={deleteDone}>删除已完成</Button>
+      </Box>
     </>
   );
 }
