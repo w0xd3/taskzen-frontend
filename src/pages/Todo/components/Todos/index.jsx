@@ -32,40 +32,42 @@ const TodoData = {
 
 export default function Todos() {
 
+  const apiInstance = new TodosControllerApi();
   const classes = useStyles();
   const [chosenId, setchosenId] = React.useState(-1)
-  const [data, setData] = React.useState(TodoData.Todos)
-
-  useEffect(() => {
-      let apiInstance = new TodosControllerApi();
-      let id = 1; // Number
-      apiInstance.getTodosById(id, (error, _data, response) => {
-        if (error) {
-          console.error(error);
-        } else {
-          console.log('API called successfully. Returned data: ' + _data.text);
-          console.log(response)
-        }
-      });
-    },[]
-  )
+  const [data, setData] = React.useState()
 
   useEffect(() => {
 
-    PubSub.subscribe('new_todo_data', (_, todo) => {
-      if (todo.text.trim() === '') return
-
-      const n_data = [todo, ...data];
-      setData(n_data);
-      console.log(data)
+    let id = 1; // Number | 
+    apiInstance.getTodosById(id, (error, _, response) => {
+      if (error) {
+        console.error(error);
+      } else {
+        console.log(response.body);
+        setData(response.body)
+      }
     });
 
-  }, [data])
+    PubSub.subscribe('new_todo_data', (_, todo) => {
+      console.log(todo)
+      if (todo.text.trim() === '') return
+
+      // add
+      apiInstance.addTodo(todo)
+
+
+      // const n_data = [todo, ...data];
+      // setData(n_data);
+      // console.log(data)
+    });
+
+  }, [])
 
   // 处理点击效果
-  const handleToggle = (TodoId) => () => {
+  const handleToggle = (todoId) => () => {
     let newData = data.map((el) => {
-      if (el.TodoId === TodoId) return { ...el, done: !el.done }
+      if (el.todoId === todoId) return { ...el, done: !el.done }
       return el
     })
     setData(newData)
@@ -81,10 +83,13 @@ export default function Todos() {
 
   // 删除功能
   const deleteTodo = (id) => () => {
-    setData(data.filter((e) => {
-      if (e.TodoId !== id) return e
-    })
-    )
+
+    apiInstance.removeTodo(id)
+
+    // setData(data.filter((e) => {
+    //   if (e.TodoId !== id) return e
+    // })
+    // )
   }
 
   // 删除已完成任务功能
@@ -111,12 +116,12 @@ export default function Todos() {
             width: '550px',
           }}
         >
-          {data.map((value) => {
-            const labelId = `checkbox-list-label-${value.TodoId}`;
+          {data && data.map((value) => {
+            const labelId = `checkbox-list-label-${value.todoId}`;
             return (
-              <ListItem key={value.TodoId} role={undefined} dense button
+              <ListItem key={value.todoId} role={undefined} dense button
                 className={classes.item}
-                onMouseOver={handleMouseOver(value.TodoId)}
+                onMouseOver={handleMouseOver(value.todoId)}
                 onMouseOut={handleMouseOut}
               >
 
@@ -127,18 +132,18 @@ export default function Todos() {
                     tabIndex={-1}
                     disableRipple
                     inputProps={{ 'aria-labelledby': labelId }}
-                    onClick={handleToggle(value.TodoId)}
+                    onClick={handleToggle(value.todoId)}
                   />
                 </ListItemIcon>
 
                 <ListItemText id={labelId} primary={value.text} />
 
-                {(chosenId === value.TodoId) &&
+                {(chosenId === value.todoId) &&
                   (<Button
                     variant="contained"
                     color="secondary"
                     size='small'
-                    onClick={deleteTodo(value.TodoId)}
+                    onClick={deleteTodo(value.todoId)}
                   >
                     Delete
                   </Button>)

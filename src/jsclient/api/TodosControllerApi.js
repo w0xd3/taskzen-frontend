@@ -48,7 +48,6 @@ export default class TodosControllerApi {
      * @param {module:api/TodosControllerApi~addTodoCallback} callback The callback function, accepting three arguments: error, data, response
      */
     addTodo(todoDTO, callback) {
-      let postBody = null;
       // verify the required parameter 'todoDTO' is set
       if (todoDTO === undefined || todoDTO === null) {
         throw new Error("Missing the required parameter 'todoDTO' when calling addTodo");
@@ -57,12 +56,14 @@ export default class TodosControllerApi {
       let pathParams = {
       };
       let queryParams = {
-        'todoDTO': todoDTO
       };
       let headerParams = {
       };
       let formParams = {
       };
+      let postBody = {
+        ...todoDTO
+      }
 
       let authNames = [];
       let contentTypes = [];

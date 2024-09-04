@@ -1,6 +1,5 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
-import { nanoid } from 'nanoid';
 import PubSub from 'pubsub-js'
 import Avatar from '@mui/material/Avatar';
 import { Box } from '@mui/system';
@@ -12,15 +11,12 @@ export default function Header() {
         if (event.key !== 'Enter') return
 
         const text = event.target.value
-        const id = nanoid()
         const textFiled = document.getElementById('outlined-full-width')
         textFiled.value = ''
 
         const data = {
-            TodoId: id,
-            text: text,
-            createTime: Date.now(),
-            done: false
+            userId:1,
+            text: text
         }
 
         PubSub.publish('new_todo_data', data)
@@ -28,7 +24,6 @@ export default function Header() {
 
     return (
         <>
-
             <Box
                 sx={{
                     display: 'flex',
