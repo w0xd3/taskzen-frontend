@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import TodosControllerApi from '../../../../jsclient/api/TodosControllerApi'
+
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -33,6 +35,20 @@ export default function Todos() {
   const classes = useStyles();
   const [chosenId, setchosenId] = React.useState(-1)
   const [data, setData] = React.useState(TodoData.Todos)
+
+  useEffect(() => {
+      let apiInstance = new TodosControllerApi();
+      let id = 1; // Number
+      apiInstance.getTodosById(id, (error, _data, response) => {
+        if (error) {
+          console.error(error);
+        } else {
+          console.log('API called successfully. Returned data: ' + _data.text);
+          console.log(response)
+        }
+      });
+    },[]
+  )
 
   useEffect(() => {
 
