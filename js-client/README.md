@@ -122,6 +122,7 @@ All URIs are relative to *http://localhost:8080*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *Swagger.TodosControllerApi* | [**addTodo**](docs/TodosControllerApi.md#addTodo) | **PUT** /todos/addTodo | 
+*Swagger.TodosControllerApi* | [**changeStatus**](docs/TodosControllerApi.md#changeStatus) | **POST** /todos/ch | 
 *Swagger.TodosControllerApi* | [**getTodosById**](docs/TodosControllerApi.md#getTodosById) | **GET** /todos/{id} | getTodosById
 *Swagger.TodosControllerApi* | [**removeTodo**](docs/TodosControllerApi.md#removeTodo) | **DELETE** /todos/remove | 
 *Swagger.UserControllerApi* | [**testSwagger**](docs/UserControllerApi.md#testSwagger) | **GET** /user/hello | 测试Swagger3注解方法Get

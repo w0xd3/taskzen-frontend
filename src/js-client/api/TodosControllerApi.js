@@ -48,6 +48,7 @@ export default class TodosControllerApi {
      * @param {module:api/TodosControllerApi~addTodoCallback} callback The callback function, accepting three arguments: error, data, response
      */
     addTodo(todoDTO, callback) {
+      let postBody = todoDTO;
       // verify the required parameter 'todoDTO' is set
       if (todoDTO === undefined || todoDTO === null) {
         throw new Error("Missing the required parameter 'todoDTO' when calling addTodo");
@@ -61,16 +62,52 @@ export default class TodosControllerApi {
       };
       let formParams = {
       };
-      let postBody = {
-        ...todoDTO
-      }
 
       let authNames = [];
-      let contentTypes = [];
+      let contentTypes = ['application/json'];
       let accepts = [];
       let returnType = null;
       return this.apiClient.callApi(
         '/todos/addTodo', 'PUT',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the changeStatus operation.
+     * @callback module:api/TodosControllerApi~changeStatusCallback
+     * @param {String} error Error message, if any.
+     * @param data This operation does not return a value.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * @param {Number} body 
+     * @param {module:api/TodosControllerApi~changeStatusCallback} callback The callback function, accepting three arguments: error, data, response
+     */
+    changeStatus(body, callback) {
+      let postBody = body;
+      // verify the required parameter 'body' is set
+      if (body === undefined || body === null) {
+        throw new Error("Missing the required parameter 'body' when calling changeStatus");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = [];
+      let contentTypes = ['application/json'];
+      let accepts = [];
+      let returnType = null;
+      return this.apiClient.callApi(
+        '/todos/ch', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );
@@ -127,20 +164,19 @@ export default class TodosControllerApi {
      */
 
     /**
-     * @param {Array.<Number>} todoIds 
+     * @param {Array.<Number>} requestBody 
      * @param {module:api/TodosControllerApi~removeTodoCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    removeTodo(todoIds, callback) {
-      let postBody = null;
-      // verify the required parameter 'todoIds' is set
-      if (todoIds === undefined || todoIds === null) {
-        throw new Error("Missing the required parameter 'todoIds' when calling removeTodo");
+    removeTodo(requestBody, callback) {
+      let postBody = requestBody;
+      // verify the required parameter 'requestBody' is set
+      if (requestBody === undefined || requestBody === null) {
+        throw new Error("Missing the required parameter 'requestBody' when calling removeTodo");
       }
 
       let pathParams = {
       };
       let queryParams = {
-        'todoIds': this.apiClient.buildCollectionParam(todoIds, 'multi')
       };
       let headerParams = {
       };
@@ -148,7 +184,7 @@ export default class TodosControllerApi {
       };
 
       let authNames = [];
-      let contentTypes = [];
+      let contentTypes = ['application/json'];
       let accepts = [];
       let returnType = null;
       return this.apiClient.callApi(

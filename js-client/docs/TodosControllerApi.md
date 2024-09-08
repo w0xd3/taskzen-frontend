@@ -5,6 +5,7 @@ All URIs are relative to *http://localhost:8080*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**addTodo**](TodosControllerApi.md#addTodo) | **PUT** /todos/addTodo | 
+[**changeStatus**](TodosControllerApi.md#changeStatus) | **POST** /todos/ch | 
 [**getTodosById**](TodosControllerApi.md#getTodosById) | **GET** /todos/{id} | getTodosById
 [**removeTodo**](TodosControllerApi.md#removeTodo) | **DELETE** /todos/remove | 
 
@@ -37,7 +38,7 @@ apiInstance.addTodo(todoDTO, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **todoDTO** | [**TodoDTO**](.md)|  | 
+ **todoDTO** | [**TodoDTO**](TodoDTO.md)|  | 
 
 ### Return type
 
@@ -49,7 +50,50 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## changeStatus
+
+> changeStatus(body)
+
+
+
+### Example
+
+```javascript
+import Swagger from '_swagger';
+
+let apiInstance = new Swagger.TodosControllerApi();
+let body = 789; // Number | 
+apiInstance.changeStatus(body, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully.');
+  }
+});
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | **Number**|  | 
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: Not defined
 
 
@@ -98,7 +142,7 @@ No authorization required
 
 ## removeTodo
 
-> removeTodo(todoIds)
+> removeTodo(requestBody)
 
 
 
@@ -108,8 +152,8 @@ No authorization required
 import Swagger from '_swagger';
 
 let apiInstance = new Swagger.TodosControllerApi();
-let todoIds = [null]; // [Number] | 
-apiInstance.removeTodo(todoIds, (error, data, response) => {
+let requestBody = [null]; // [Number] | 
+apiInstance.removeTodo(requestBody, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -123,7 +167,7 @@ apiInstance.removeTodo(todoIds, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **todoIds** | [**[Number]**](Number.md)|  | 
+ **requestBody** | [**[Number]**](Number.md)|  | 
 
 ### Return type
 
@@ -135,6 +179,6 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: Not defined
 

@@ -1,5 +1,6 @@
 .babelrc
 .gitignore
+.openapi-generator-ignore
 .travis.yml
 README.md
 docs/TodoDTO.md
@@ -15,4 +16,7 @@ src/api/UserControllerApi.js
 src/index.js
 src/model/TodoDTO.js
 src/model/TodoVO.js
+test/api/TodosControllerApi.spec.js
+test/api/UserControllerApi.spec.js
+test/model/TodoDTO.spec.js
 test/model/TodoVO.spec.js

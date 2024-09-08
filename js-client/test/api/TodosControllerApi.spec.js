@@ -58,6 +58,16 @@
         done();
       });
     });
+    describe('changeStatus', function() {
+      it('should call changeStatus successfully', function(done) {
+        //uncomment below and update the code to test changeStatus
+        //instance.changeStatus(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe('getTodosById', function() {
       it('should call getTodosById successfully', function(done) {
         //uncomment below and update the code to test getTodosById

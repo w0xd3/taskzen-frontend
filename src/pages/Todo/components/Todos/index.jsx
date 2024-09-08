@@ -1,7 +1,6 @@
-import TodosControllerApi from '../../../../jsclient/api/TodosControllerApi'
+import TodosControllerApi from '../../../../js-client/api/TodosControllerApi'
 
-import React, { useEffect } from 'react';
-import { makeStyles } from '@material-ui/styles';
+import React, { useEffect, useState } from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -11,58 +10,55 @@ import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import PubSub from 'pubsub-js'
-import { Box } from '@mui/system';
-
-const useStyles = makeStyles(() => ({
-  item: {
-    width: 600,
-    height: 50
-  }
-}));
-
-// mock data
-const TodoData = {
-  Todos: [
-    { TodoId: '001', text: '吃饭', createTime: 10, done: false },
-    { TodoId: '002', text: '睡觉', createTime: 20, done: false },
-    { TodoId: '003', text: '学习', createTime: 80, done: false },
-    { TodoId: '004', text: '跳舞', createTime: 30, done: false },
-  ]
-}
 
 export default function Todos() {
 
   const apiInstance = new TodosControllerApi();
-  const classes = useStyles();
-  const [chosenId, setchosenId] = React.useState(-1)
-  const [data, setData] = React.useState()
+  const [chosenId, setchosenId] = useState(-1)
+  const [data, setData] = useState()
+  const [showDeleteDone, setShowDeleteDone] = useState()
 
-  useEffect(() => {
-
-    let id = 1; // Number | 
+  // 初次加载时获取待办事项数据
+  const fetchTodos = () => {
+    let id = 1;
     apiInstance.getTodosById(id, (error, _, response) => {
       if (error) {
         console.error(error);
       } else {
-        console.log(response.body);
-        setData(response.body)
+        setData(response.body);
       }
     });
+  };
 
-    PubSub.subscribe('new_todo_data', (_, todo) => {
-      console.log(todo)
-      if (todo.text.trim() === '') return
+  useEffect(() => {
+    // 调用 fetchTodos 获取初始数据
+    fetchTodos();
 
-      // add
-      apiInstance.addTodo(todo)
+    // 订阅新增任务事件
+    const token = PubSub.subscribe('new_todo_data', (_, todo) => {
+      if (todo.text.trim() === '') return;
 
-
-      // const n_data = [todo, ...data];
-      // setData(n_data);
-      // console.log(data)
+      // 加到数据库
+      apiInstance.addTodo(todo, (error) => {
+        if (error) {
+          console.error(error);
+        } else {
+          // 新增成功后重新获取最新的任务列表并更新
+          fetchTodos(); // 再次获取数据
+        }
+      });
     });
 
-  }, [])
+    // 卸载时取消订阅
+    return () => {
+      PubSub.unsubscribe(token);
+    };
+  }, []);
+
+
+  useEffect(() => {
+    setShowDeleteDone(data ? data.length > 0 : false)
+  }, [data])
 
   // 处理点击效果
   const handleToggle = (todoId) => () => {
@@ -83,91 +79,86 @@ export default function Todos() {
 
   // 删除功能
   const deleteTodo = (id) => () => {
-
-    apiInstance.removeTodo(id)
-
-    // setData(data.filter((e) => {
-    //   if (e.TodoId !== id) return e
-    // })
-    // )
+    apiInstance.removeTodo([id], (error) => {
+      if (error) {
+        console.error(error);
+      } else {
+        fetchTodos(); // 再次获取数据
+      }
+    })
   }
 
   // 删除已完成任务功能
   const deleteDone = () => {
-    setData(data.filter((e) => {
-      if (!e.done) return e
+    const ids = data.filter(e => e.done).map(e => e.todoId);
+    apiInstance.removeTodo(ids, (error) => {
+      if (error) {
+        console.error(error);
+      } else {
+        fetchTodos(); // 再次获取数据
+      }
     })
-    )
   }
 
   return (
     <>
-      <Box
+      <List
         sx={{
-          display: 'flex',
-          justifyContent: 'center', // 水平居中
+          flexDirection: 'column',
+          marginLeft: '15%',
+          width: '70%',
         }}
       >
-        <List
-          sx={{
-            flexDirection: 'column',
-            // alignItems: 'center', // 让列表项居中
-            // justifyContent: 'center', // 水平居中
-            width: '550px',
-          }}
-        >
-          {data && data.map((value) => {
-            const labelId = `checkbox-list-label-${value.todoId}`;
-            return (
-              <ListItem key={value.todoId} role={undefined} dense button
-                className={classes.item}
-                onMouseOver={handleMouseOver(value.todoId)}
-                onMouseOut={handleMouseOut}
-              >
+        {data && data.map((value) => {
+          const labelId = `checkbox-list-label-${value.todoId}`;
+          return (
+            <ListItem key={value.todoId} role={undefined} dense button
+              onMouseOver={handleMouseOver(value.todoId)}
+              onMouseOut={handleMouseOut}
+            >
 
-                <ListItemIcon>
-                  <Checkbox
-                    edge="start"
-                    checked={value.done}
-                    tabIndex={-1}
-                    disableRipple
-                    inputProps={{ 'aria-labelledby': labelId }}
-                    onClick={handleToggle(value.todoId)}
-                  />
-                </ListItemIcon>
+              <ListItemIcon>
+                <Checkbox
+                  edge="start"
+                  checked={value.done}
+                  tabIndex={-1}
+                  disableRipple
+                  inputProps={{ 'aria-labelledby': labelId }}
+                  onClick={handleToggle(value.todoId)}
+                />
+              </ListItemIcon>
 
-                <ListItemText id={labelId} primary={value.text} />
+              <ListItemText id={labelId} primary={value.text} />
 
-                {(chosenId === value.todoId) &&
-                  (<Button
-                    variant="contained"
-                    color="secondary"
-                    size='small'
-                    onClick={deleteTodo(value.todoId)}
-                  >
-                    Delete
-                  </Button>)
-                }
+              {(chosenId === value.todoId) &&
+                (<Button
+                  variant="contained"
+                  size='small'
+                  onClick={deleteTodo(value.todoId)}
+                >
+                  Delete
+                </Button>)
+              }
 
-                <ListItemSecondaryAction>
-                  <IconButton edge="end" aria-label="comments">
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-            );
-          })}
-        </List>
-      </Box>
+              <ListItemSecondaryAction>
+                <IconButton edge="end" aria-label="comments">
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+          );
+        })}
+      </List>
 
-      {/* TODO */}
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center', // 水平居中
+      {showDeleteDone && <Button
+        variant="contained"
+        onClick={deleteDone}
+        style={{
+          marginLeft: '40%',
+          width: '20%'
         }}
       >
-        <Button variant="contained" color="secondary" onClick={deleteDone}>删除已完成</Button>
-      </Box>
+        删除已完成
+      </Button>}
     </>
   );
 }
