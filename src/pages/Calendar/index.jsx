@@ -19,7 +19,7 @@ export default function Calendar() {
   const [currentEvents, setCurrentEvents] = useState([])
   const [open, setOpen] = useState(false);
   const clickTimeout = useRef(null); // 引用来存储定时器
-  const [clickCount, setClickCount] = useState(0); // 记录点击次数
+  const clickCount = useRef(0); // 记录点击次数
 
   // 处理日期选择的函数
   function handleDateSelect(selectInfo) {
@@ -42,29 +42,29 @@ export default function Calendar() {
     }
   }
 
-  //Todo 单击双击时间、看下这个逻辑好不好实现
+  //Todo 
   function handleEventClick(clickInfo) {
+
     const taskId = clickInfo.event.id
     
-    
-    setClickCount((prev) => prev + 1);
+    clickCount.current += 1;
 
     if (clickTimeout.current) {
       clearTimeout(clickTimeout.current);
     }
-
+    console.log(clickCount)
     clickTimeout.current = setTimeout(() => {
-      if (clickCount === 1) {
+      if (clickCount.current === 1) {
         // 单击事件
-        console.log('Single Click:', clickInfo.event.title);
-      } else if (clickCount === 2) {
+        console.log('单击改变状态:', clickInfo.event.title);
+      } else if (clickCount.current === 2) {
         // 双击事件
-        console.log('Double Click:', clickInfo.event.title);
+        console.log('双击修改或删除:', clickInfo.event.title);
       }
 
       // 重置点击次数
-      setClickCount(0);
-    }, 1000); // 设置延迟，250ms内未再点击则视为单击
+      clickCount.current = 0;
+    }, 250); // 设置延迟，250ms内未再点击则视为单击
   }
 
   // 更新当前事件
