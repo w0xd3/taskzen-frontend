@@ -4,7 +4,7 @@ import './index.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { formatDate } from '@fullcalendar/core'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
@@ -18,6 +18,8 @@ export default function Calendar() {
 
   const [currentEvents, setCurrentEvents] = useState([])
   const [open, setOpen] = useState(false);
+  const clickTimeout = useRef(null); // 引用来存储定时器
+  const [clickCount, setClickCount] = useState(0); // 记录点击次数
 
   // 处理日期选择的函数
   function handleDateSelect(selectInfo) {
@@ -40,11 +42,29 @@ export default function Calendar() {
     }
   }
 
-  // 确认删除事件
+  //Todo 单击双击时间、看下这个逻辑好不好实现
   function handleEventClick(clickInfo) {
-    if (console.log(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-      clickInfo.event.remove()
+    const taskId = clickInfo.event.id
+    
+    
+    setClickCount((prev) => prev + 1);
+
+    if (clickTimeout.current) {
+      clearTimeout(clickTimeout.current);
     }
+
+    clickTimeout.current = setTimeout(() => {
+      if (clickCount === 1) {
+        // 单击事件
+        console.log('Single Click:', clickInfo.event.title);
+      } else if (clickCount === 2) {
+        // 双击事件
+        console.log('Double Click:', clickInfo.event.title);
+      }
+
+      // 重置点击次数
+      setClickCount(0);
+    }, 1000); // 设置延迟，250ms内未再点击则视为单击
   }
 
   // 更新当前事件
@@ -102,6 +122,7 @@ export default function Calendar() {
         eventRemove={function(){}}
         */
         />
+
         <Drawer
           title="新增任务"
           width={720}
@@ -115,6 +136,7 @@ export default function Calendar() {
           extra={
             <Space>
               <Button onClick={onClose}>关闭</Button>
+              {/* Todo 提交逻辑 */}
               <Button onClick={onClose} type="primary">提交</Button>
             </Space>
           }
