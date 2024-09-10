@@ -169,7 +169,7 @@
         text VARCHAR(20) NOT NULL,                  -- 任务内容
         p INT DEFAULT 0,                            -- 任务优先级，默认值为0
         description VARCHAR(50) DEFAULT '',			-- 任务描述，默认值为空
-        done BOOLEAN NOT NULL,                      -- 任务完成状态
+        done BOOLEAN DEFAULT False,                      -- 任务完成状态
         start_time BIGINT NOT NULL,                 -- 任务开始时间
         end_time BIGINT NOT NULL,                   -- 任务结束时间
         create_time BIGINT NOT NULL,                -- 任务创建时间
@@ -228,7 +228,11 @@ VALUES
 
 ## 联调
 
-#### **使用 `OpenAPI `Generator 生成 JavaScript 客户端代码**
+#### 后端swagger接口文档地址
+
+`http://localhost:8080/swagger-ui/index.html`
+
+#### **使用 `OpenAPI `Generator 生成 JavaScript 客户端代码s**
 
 1. **安装 `OpenAPI Generator CLI`**
 
