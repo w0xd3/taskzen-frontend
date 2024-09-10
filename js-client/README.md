@@ -102,8 +102,8 @@ Please follow the [installation](#installation) instruction and execute the foll
 var Swagger = require('_swagger');
 
 
-var api = new Swagger.TodosControllerApi()
-var todoDTO = new Swagger.TodoDTO(); // {TodoDTO} 
+var api = new Swagger.TaskControllerApi()
+var task = new Swagger.Task(); // {Task} 
 var callback = function(error, data, response) {
   if (error) {
     console.error(error);
@@ -111,7 +111,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-api.addTodo(todoDTO, callback);
+api.addTask(task, callback);
 
 ```
 
@@ -121,6 +121,10 @@ All URIs are relative to *http://localhost:8080*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*Swagger.TaskControllerApi* | [**addTask**](docs/TaskControllerApi.md#addTask) | **PUT** /task | 
+*Swagger.TaskControllerApi* | [**deleteTask**](docs/TaskControllerApi.md#deleteTask) | **DELETE** /task/{taskId} | 
+*Swagger.TaskControllerApi* | [**getTasksById**](docs/TaskControllerApi.md#getTasksById) | **GET** /task/{userId} | 
+*Swagger.TaskControllerApi* | [**modifyTask**](docs/TaskControllerApi.md#modifyTask) | **POST** /task | 
 *Swagger.TodosControllerApi* | [**addTodo**](docs/TodosControllerApi.md#addTodo) | **PUT** /todos/addTodo | 
 *Swagger.TodosControllerApi* | [**changeStatus**](docs/TodosControllerApi.md#changeStatus) | **POST** /todos/ch | 
 *Swagger.TodosControllerApi* | [**getTodosById**](docs/TodosControllerApi.md#getTodosById) | **GET** /todos/{id} | getTodosById
@@ -130,6 +134,8 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
+ - [Swagger.Task](docs/Task.md)
+ - [Swagger.TaskVO](docs/TaskVO.md)
  - [Swagger.TodoDTO](docs/TodoDTO.md)
  - [Swagger.TodoVO](docs/TodoVO.md)
 

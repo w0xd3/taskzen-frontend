@@ -13,8 +13,11 @@
 
 
 import ApiClient from './ApiClient';
+import Task from './model/Task';
+import TaskVO from './model/TaskVO';
 import TodoDTO from './model/TodoDTO';
 import TodoVO from './model/TodoVO';
+import TaskControllerApi from './api/TaskControllerApi';
 import TodosControllerApi from './api/TodosControllerApi';
 import UserControllerApi from './api/UserControllerApi';
 
@@ -58,6 +61,18 @@ export {
     ApiClient,
 
     /**
+     * The Task model constructor.
+     * @property {module:model/Task}
+     */
+    Task,
+
+    /**
+     * The TaskVO model constructor.
+     * @property {module:model/TaskVO}
+     */
+    TaskVO,
+
+    /**
      * The TodoDTO model constructor.
      * @property {module:model/TodoDTO}
      */
@@ -68,6 +83,12 @@ export {
      * @property {module:model/TodoVO}
      */
     TodoVO,
+
+    /**
+    * The TaskControllerApi service constructor.
+    * @property {module:api/TaskControllerApi}
+    */
+    TaskControllerApi,
 
     /**
     * The TodosControllerApi service constructor.

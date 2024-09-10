@@ -170,13 +170,14 @@
         p INT DEFAULT 0,                            -- 任务优先级，默认值为0
         description VARCHAR(50) DEFAULT '',			-- 任务描述，默认值为空
         done BOOLEAN NOT NULL,                      -- 任务完成状态
-        start_time BIGINT NOT NULL,                 -- 任务开始时间，Unix时间戳
-        end_time BIGINT NOT NULL,                   -- 任务结束时间，Unix时间戳
-        create_time BIGINT NOT NULL,                -- 任务创建时间，Unix时间戳
-        tag VARCHAR(30)                             -- 任务标签（例如：bug，feature，maintenance）
+        start_time BIGINT NOT NULL,                 -- 任务开始时间
+        end_time BIGINT NOT NULL,                   -- 任务结束时间
+        create_time BIGINT NOT NULL,                -- 任务创建时间
+        tag VARCHAR(30),                            -- 任务标签（例如：bug，feature，maintenance）
+        background_color VARCHAR(7) DEFAULT '#0000FF'  -- 任务背景颜色，默认为蓝色
     );
     ```
-
+    
   - 注意，用时间戳的格式需要在前端重新转换，full calendar只能读`YYYY-MM-DD`格式的日期
 
 - 
@@ -211,15 +212,18 @@ INSERT INTO todos (user_id, text, create_time, done) VALUES
 **Task表**
 
 ```sql
-INSERT INTO task (user_id, text, p, done, start_time, end_time, create_time, tag)
+INSERT INTO task (user_id, text, p, description, done, start_time, end_time, create_time, tag)
 VALUES
-(1, 'Complete project report', 2, false, 1693905600, 1693992000, 1693884000, 'report'),   -- 报告任务
-(2, 'Attend team meeting', 1, true, 1693819200, 1693905600, 1693804800, 'meeting'),       -- 团队会议
-(1, 'Fix bug #101', 3, false, 1694082000, 1694168400, 1694053200, 'bug'),                -- 修复BUG任务
-(3, 'Prepare presentation', 1, true, 1693984800, 1693992000, 1693956000, 'presentation'),-- 演讲任务
-(4, 'Write unit tests', 0, false, 1694157600, 1694251200, 1694136000, 'testing'),        -- 编写单元测试任务
-(2, 'Update documentation', 2, true, 1693843200, 1693884000, 1693831200, 'documentation'),-- 更新文档任务
-(3, 'Research new technology', 1, false, 1694119200, 1694212800, 1694097600, 'research');-- 技术调研任务
+(1, '完成作业', 3, '数学作业', FALSE, 1693600000, 1693680000, 1693510000, '学习'),
+(2, '阅读书籍', 2, '小说《三体》', TRUE, 1694200000, 1694290000, 1694205000, '娱乐'),
+(3, '跑步锻炼', 1, '每天晨跑', FALSE, 1694100000, 1694190000, 1694085000, '健康'),
+(4, '写博客', 4, '完成技术博客', TRUE, 1694300000, 1694390000, 1694250000, '工作'),
+(5, '整理笔记', 2, '编程笔记整理', FALSE, 1694000000, 1694100000, 1693990000, '学习'),
+(6, '团队会议', 5, '项目进展汇报', TRUE, 1694500000, 1694580000, 1694400000, '工作'),
+(7, '学习新技术', 3, '学习React框架', FALSE, 1694600000, 1694690000, 1694605000, '学习'),
+(8, '健身', 1, '进行力量训练', TRUE, 1693750000, 1693830000, 1693730000, '健康'),
+(9, '项目开发', 4, '新功能模块开发', FALSE, 1693680000, 1693760000, 1693655000, '工作'),
+(10, '休闲时光', 0, '看电影', TRUE, 1694200000, 1694290000, 1694175000, '娱乐');
 ```
 
 ## 联调
