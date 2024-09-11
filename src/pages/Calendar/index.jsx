@@ -21,10 +21,12 @@ export default function Calendar() {
   const [INITIAL_EVENTS, SetINITIAL_EVENTS] = useState([])
   const [currentEvents, setCurrentEvents] = useState([])
   const [open, setOpen] = useState(false);
+  const [isAdd, setIsAdd] = useState(false);
 
-  const clickTimeout = useRef(null); 
-  const clickCount = useRef(0); 
+  const clickTimeout = useRef(null);
+  const clickCount = useRef(0);
 
+  // 重新获取数据
   const fetchTasks = () => {
     let id = 1;
     apiInstance.getTasksById(id, (error, _, response) => {
@@ -40,27 +42,41 @@ export default function Calendar() {
     fetchTasks()
   }, [])
 
+  // 决定Drawer是否开启
   const handleOpen = (taskOpen) => {
     setOpen(taskOpen)
   }
 
-  // TODO 改变状态半透明
+  // 改变已完成任务颜色
   const componentDidMount = (info) => {
     console.log(info.event.extendedProps.done)
-    if(info.event.extendedProps.done){
+    if (info.event.extendedProps.done) {
       info.el.style.backgroundColor = 'gray';
     }
   }
 
+  // 处理Task提交事件
   const onSubmit = (task) => {
-    apiInstance.addTask(task, (error, _, __) => {
-      if(error){
-        console.log(error)
-      }else{
-        alert("任务保存成功")
-        fetchTasks()
-      }
-    })
+    if (isAdd) { // 新增逻辑
+      apiInstance.addTask(task, (error, _, __) => {
+        if (error) {
+          console.log(error)
+        } else {
+          alert("任务保存成功")
+          fetchTasks()
+        }
+      })
+      setIsAdd(false)
+    }else{ // 修改逻辑
+      apiInstance.modifyTask(task, (error, _, __) => {
+        if (error) {
+          console.log(error)
+        } else {
+          alert("任务修改成功")
+          fetchTasks()
+        }
+      })
+    }
   }
 
   // 处理日期选择的函数
@@ -84,28 +100,36 @@ export default function Calendar() {
     }
   }
 
-  //Todo 
+  // 处理单击、双击事件
   function handleEventClick(clickInfo) {
 
     const taskId = clickInfo.event.id
+    const done = clickInfo.event.extendedProps.done
 
     clickCount.current += 1;
+
+    console.log({ taskId, done: !done })
 
     if (clickTimeout.current) {
       clearTimeout(clickTimeout.current);
     }
     clickTimeout.current = setTimeout(() => {
       if (clickCount.current === 1) { // 单击修改状态
-        // apiInstance.modifyTask()
-        
+        apiInstance.modifyTask({ 'taskId': taskId, 'done': !done }, (error, _, __) => {
+          if (error) {
+            console.log(error)
+          } else {
+            console.log("修改状态成功")
+          }
+        })
+
       } else if (clickCount.current === 2) { // 双击修改或删除
-        
-        
+        setOpen(true)
       }
 
       // 重置点击次数
       clickCount.current = 0;
-    }, 250); 
+    }, 250);
   }
 
   // 更新当前事件
@@ -115,6 +139,7 @@ export default function Calendar() {
 
   const showDrawer = () => {
     setOpen(true);
+    setIsAdd(true);
   };
 
   return (
@@ -126,14 +151,14 @@ export default function Calendar() {
 
       <div className='demo-app-main'>
         <FullCalendar
-          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]} 
+          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={{
-            left: 'prev,next today myCustomButton',   
-            center: 'title',           
-            right: 'timeGridDay,timeGridWeek,dayGridMonth' 
+            left: 'prev,next today myCustomButton',
+            center: 'title',
+            right: 'timeGridDay,timeGridWeek,dayGridMonth'
           }}
-          locales={[zhCnLocale]} 
-          locale="zh-cn"         
+          locales={[zhCnLocale]}
+          locale="zh-cn"
           themeSystem='bootstrap5'
           initialView='timeGridWeek'
           editable={true}
@@ -154,12 +179,6 @@ export default function Calendar() {
           buttonIcons={{
             myCustomButton: 'bi bi-bookmark-plus',
           }}
-
-        /* 可以在这里处理事件添加、修改和删除的远程数据库更新:
-        eventAdd={function(){}}
-        eventChange={function(){}}
-        eventRemove={function(){}}
-        */
         />
 
         {open && <Task handleOpen={handleOpen} onSubmit={onSubmit} />}
@@ -208,7 +227,7 @@ const colorMap = ['#FF4500', '#FF8C00', '#FFD700', '#B0E57C'];
 // 侧边栏中的事件项组件
 function SidebarEvent({ event }) {
   // console.log(event.extendedProps)
-  const {p, tag} = event.extendedProps
+  const { p, tag } = event.extendedProps
   return (
     <li key={event.id}>
       {p !== null && <Tag color={colorMap[p]}>P{p}</Tag>}
