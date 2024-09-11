@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**userId** | **Number** |  | [optional] 
+**todoId** | **Number** |  | [optional] 
 **text** | **String** |  | [optional] 
 
 

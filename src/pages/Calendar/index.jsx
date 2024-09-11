@@ -12,7 +12,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import zhCnLocale from '@fullcalendar/core/locales/zh-cn' // 引入中文语言包
-
+import { Tag } from 'antd';
 
 export default function Calendar() {
 
@@ -42,6 +42,14 @@ export default function Calendar() {
 
   const handleOpen = (taskOpen) => {
     setOpen(taskOpen)
+  }
+
+  // TODO 改变状态半透明
+  const componentDidMount = (info) => {
+    console.log(info.event.extendedProps.done)
+    if(info.event.extendedProps.done){
+      info.el.style.backgroundColor = 'gray';
+    }
   }
 
   const onSubmit = (task) => {
@@ -86,7 +94,6 @@ export default function Calendar() {
     if (clickTimeout.current) {
       clearTimeout(clickTimeout.current);
     }
-    console.log(clickCount)
     clickTimeout.current = setTimeout(() => {
       if (clickCount.current === 1) { // 单击修改状态
         // apiInstance.modifyTask()
@@ -137,6 +144,7 @@ export default function Calendar() {
           eventContent={renderEventContent}
           eventClick={handleEventClick}
           eventsSet={handleEvents}
+          eventDidMount={componentDidMount}
           customButtons={{
             myCustomButton: {
               text: '新增任务',
@@ -194,10 +202,17 @@ function Sidebar({ currentEvents }) {
   )
 }
 
+const colorMap = ['#FF4500', '#FF8C00', '#FFD700', '#B0E57C'];
+
+
 // 侧边栏中的事件项组件
 function SidebarEvent({ event }) {
+  // console.log(event.extendedProps)
+  const {p, tag} = event.extendedProps
   return (
     <li key={event.id}>
+      {p !== null && <Tag color={colorMap[p]}>P{p}</Tag>}
+      {tag && <Tag color="blue">{tag}</Tag>}
       <b>{formatDate(event.start, { year: 'numeric', month: 'short', day: 'numeric' })}</b> {/* 事件开始时间 */}
       <i>{event.title}</i> {/* 事件标题 */}
     </li>

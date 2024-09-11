@@ -43,7 +43,6 @@ export default function Task(props) {
             <Form
                 form={form}
                 layout="vertical"
-                hideRequiredMark
                 onFinish={onFinish}
             >
                 <Row gutter={16}>

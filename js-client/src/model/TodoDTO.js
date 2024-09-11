@@ -47,8 +47,8 @@ class TodoDTO {
         if (data) {
             obj = obj || new TodoDTO();
 
-            if (data.hasOwnProperty('userId')) {
-                obj['userId'] = ApiClient.convertToType(data['userId'], 'Number');
+            if (data.hasOwnProperty('todoId')) {
+                obj['todoId'] = ApiClient.convertToType(data['todoId'], 'Number');
             }
             if (data.hasOwnProperty('text')) {
                 obj['text'] = ApiClient.convertToType(data['text'], 'String');
@@ -77,9 +77,9 @@ class TodoDTO {
 
 
 /**
- * @member {Number} userId
+ * @member {Number} todoId
  */
-TodoDTO.prototype['userId'] = undefined;
+TodoDTO.prototype['todoId'] = undefined;
 
 /**
  * @member {String} text

@@ -10,6 +10,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import PubSub from 'pubsub-js'
+import { Modal, Input } from 'antd';
 
 export default function Todos() {
 
@@ -17,6 +18,7 @@ export default function Todos() {
   const [chosenId, setchosenId] = useState(-1)
   const [data, setData] = useState()
   const [showDeleteDone, setShowDeleteDone] = useState()
+  const [showInput,setShowInput] = useState(false)
 
   // 初次加载时获取待办事项数据
   const fetchTodos = () => {
@@ -62,11 +64,14 @@ export default function Todos() {
 
   // 处理点击效果
   const handleToggle = (todoId) => () => {
-    let newData = data.map((el) => {
-      if (el.todoId === todoId) return { ...el, done: !el.done }
-      return el
+    apiInstance.changeStatus({'todoId':todoId}, (error) => {
+      if (error) {
+        console.error(error);
+      } else {
+        // 新增成功后重新获取最新的任务列表并更新
+        fetchTodos(); // 再次获取数据
+      }
     })
-    setData(newData)
   };
 
   // 处理悬浮效果
@@ -100,6 +105,20 @@ export default function Todos() {
     })
   }
 
+  // 修改文本内容
+  const modifyTodo = (text) => {
+
+    // apiInstance.changeStatus({'todoId':todoId, 'text':text}, (error) => {
+    //   if (error) {
+    //     console.error(error);
+    //   } else {
+    //     // 新增成功后重新获取最新的任务列表并更新
+    //     fetchTodos(); // 再次获取数据
+    //   }
+    // })
+    
+  }
+
   return (
     <>
       <List
@@ -115,6 +134,7 @@ export default function Todos() {
             <ListItem key={value.todoId} role={undefined} dense button
               onMouseOver={handleMouseOver(value.todoId)}
               onMouseOut={handleMouseOut}
+              onClick={modifyTodo()}
             >
 
               <ListItemIcon>
@@ -159,6 +179,7 @@ export default function Todos() {
       >
         删除已完成
       </Button>}
+
     </>
   );
 }
