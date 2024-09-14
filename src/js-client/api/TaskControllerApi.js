@@ -177,7 +177,8 @@ export default class TaskControllerApi {
       let pathParams = {
       };
       let queryParams = {
-        'task': task
+        // 'task': task
+        ...task
       };
       let headerParams = {
       };

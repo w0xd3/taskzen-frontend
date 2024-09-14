@@ -15,7 +15,6 @@ export default function Task(props) {
     }
 
     const onFinish = (value) => {
-        console.log(value)
         onSubmit({...value,userId:1})
         form.resetFields();
     }

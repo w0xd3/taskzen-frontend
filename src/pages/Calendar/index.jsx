@@ -22,6 +22,7 @@ export default function Calendar() {
   const [currentEvents, setCurrentEvents] = useState([])
   const [open, setOpen] = useState(false);
   const [isAdd, setIsAdd] = useState(false);
+  const [forceUpdate, setForceUpdate] = useState(false);
 
   const clickTimeout = useRef(null);
   const clickCount = useRef(0);
@@ -29,6 +30,7 @@ export default function Calendar() {
   // 重新获取数据
   const fetchTasks = () => {
     let id = 1;
+    console.log('fetchTasks被调用')
     apiInstance.getTasksById(id, (error, _, response) => {
       if (error) {
         console.error(error);
@@ -49,7 +51,7 @@ export default function Calendar() {
 
   // 改变已完成任务颜色
   const componentDidMount = (info) => {
-    console.log(info.event.extendedProps.done)
+    console.log('componentDidMount')
     if (info.event.extendedProps.done) {
       info.el.style.backgroundColor = 'gray';
     }
@@ -74,6 +76,7 @@ export default function Calendar() {
         } else {
           alert("任务修改成功")
           fetchTasks()
+          setForceUpdate(true)
         }
       })
     }
@@ -119,7 +122,8 @@ export default function Calendar() {
           if (error) {
             console.log(error)
           } else {
-            console.log("修改状态成功")
+            alert("修改状态成功")
+            fetchTasks()
           }
         })
 
