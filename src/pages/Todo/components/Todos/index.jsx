@@ -1,6 +1,5 @@
 import TodosControllerApi from '../../../../js-client/api/TodosControllerApi'
-
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -10,7 +9,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import PubSub from 'pubsub-js'
-import { Modal, Input } from 'antd';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Todos() {
 
@@ -18,15 +18,19 @@ export default function Todos() {
   const [chosenId, setchosenId] = useState(-1)
   const [data, setData] = useState()
   const [showDeleteDone, setShowDeleteDone] = useState()
-  const [showInput,setShowInput] = useState(false)
+  const navigate = useNavigate()
+
 
   // 初次加载时获取待办事项数据
   const fetchTodos = () => {
-    let id = 1;
-    apiInstance.getTodosById(id, (error, _, response) => {
+    apiInstance.getTodosById((error, _, response) => {
+      if (response.statusCode === 302) {
+        navigate('/login');
+      }
       if (error) {
-        console.error(error);
+        console.log(error)
       } else {
+        console.log(response)
         setData(response.body);
       }
     });
@@ -64,7 +68,7 @@ export default function Todos() {
 
   // 处理点击效果
   const handleToggle = (todoId) => () => {
-    apiInstance.changeStatus({'todoId':todoId}, (error) => {
+    apiInstance.changeStatus(todoId, (error) => {
       if (error) {
         console.error(error);
       } else {
@@ -116,7 +120,7 @@ export default function Todos() {
     //     fetchTodos(); // 再次获取数据
     //   }
     // })
-    
+
   }
 
   return (

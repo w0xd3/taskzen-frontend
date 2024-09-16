@@ -14,6 +14,7 @@
 
 import ApiClient from "../ApiClient";
 import Task from '../model/Task';
+import TaskDTO from '../model/TaskDTO';
 import TaskVO from '../model/TaskVO';
 
 /**
@@ -44,14 +45,14 @@ export default class TaskControllerApi {
      */
 
     /**
-     * @param {module:model/Task} task 
+     * @param {module:model/TaskDTO} taskDTO 
      * @param {module:api/TaskControllerApi~addTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    addTask(task, callback) {
-      let postBody = task;
-      // verify the required parameter 'task' is set
-      if (task === undefined || task === null) {
-        throw new Error("Missing the required parameter 'task' when calling addTask");
+    addTask(taskDTO, callback) {
+      let postBody = taskDTO;
+      // verify the required parameter 'taskDTO' is set
+      if (taskDTO === undefined || taskDTO === null) {
+        throw new Error("Missing the required parameter 'taskDTO' when calling addTask");
       }
 
       let pathParams = {
@@ -123,19 +124,13 @@ export default class TaskControllerApi {
      */
 
     /**
-     * @param {Number} userId 
      * @param {module:api/TaskControllerApi~getTasksByIdCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link Array.<module:model/TaskVO>}
      */
-    getTasksById(userId, callback) {
+    getTasksById(callback) {
       let postBody = null;
-      // verify the required parameter 'userId' is set
-      if (userId === undefined || userId === null) {
-        throw new Error("Missing the required parameter 'userId' when calling getTasksById");
-      }
 
       let pathParams = {
-        'userId': userId
       };
       let queryParams = {
       };
@@ -149,7 +144,7 @@ export default class TaskControllerApi {
       let accepts = ['*/*'];
       let returnType = [TaskVO];
       return this.apiClient.callApi(
-        '/task/{userId}', 'GET',
+        '/task', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );
@@ -177,8 +172,7 @@ export default class TaskControllerApi {
       let pathParams = {
       };
       let queryParams = {
-        // 'task': task
-        ...task
+        'task': task
       };
       let headerParams = {
       };

@@ -4,13 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**taskId** | **Number** |  | [optional] 
-**text** | **String** |  | [optional] 
-**p** | **Number** |  | [optional] 
+**id** | **Number** |  | [optional] 
+**title** | **String** |  | [optional] 
+**p** | **String** |  | [optional] 
 **description** | **String** |  | [optional] 
 **done** | **Boolean** |  | [optional] 
-**startTime** | **Number** |  | [optional] 
-**endTime** | **Number** |  | [optional] 
+**start** | **String** |  | [optional] 
+**end** | **String** |  | [optional] 
 **tag** | **String** |  | [optional] 
+**backgroundColor** | **String** |  | [optional] 
 
 

@@ -1,4 +1,4 @@
-# Swagger.Task
+# Swagger.TaskDTO
 
 ## Properties
 
@@ -9,11 +9,8 @@ Name | Type | Description | Notes
 **text** | **String** |  | [optional] 
 **p** | **String** |  | [optional] 
 **description** | **String** |  | [optional] 
-**done** | **Boolean** |  | [optional] 
-**startTime** | **Number** |  | [optional] 
-**endTime** | **Number** |  | [optional] 
+**dateTime** | **[String]** |  | [optional] 
 **createTime** | **Number** |  | [optional] 
 **tag** | **String** |  | [optional] 
-**backgroundColor** | **String** |  | [optional] 
 
 

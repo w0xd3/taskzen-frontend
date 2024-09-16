@@ -13,6 +13,7 @@
 
 
 import ApiClient from "../ApiClient";
+import UserDTO from '../model/UserDTO';
 
 /**
 * UserController service.
@@ -32,6 +33,41 @@ export default class UserControllerApi {
         this.apiClient = apiClient || ApiClient.instance;
     }
 
+
+    /**
+     * Callback function to receive the result of the checkAuth operation.
+     * @callback module:api/UserControllerApi~checkAuthCallback
+     * @param {String} error Error message, if any.
+     * @param {Number} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * @param {module:api/UserControllerApi~checkAuthCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link Number}
+     */
+    checkAuth(callback) {
+      let postBody = null;
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = [];
+      let contentTypes = [];
+      let accepts = ['*/*'];
+      let returnType = 'Number';
+      return this.apiClient.callApi(
+        '/user/parse', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
 
     /**
      * Callback function to receive the result of the testSwagger operation.
@@ -64,6 +100,46 @@ export default class UserControllerApi {
       let returnType = 'String';
       return this.apiClient.callApi(
         '/user/hello', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the userLogin operation.
+     * @callback module:api/UserControllerApi~userLoginCallback
+     * @param {String} error Error message, if any.
+     * @param {Boolean} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * @param {module:model/UserDTO} userDTO 
+     * @param {module:api/UserControllerApi~userLoginCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link Boolean}
+     */
+    userLogin(userDTO, callback) {
+      let postBody = userDTO;
+      // verify the required parameter 'userDTO' is set
+      if (userDTO === undefined || userDTO === null) {
+        throw new Error("Missing the required parameter 'userDTO' when calling userLogin");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = [];
+      let contentTypes = ['application/json'];
+      let accepts = ['*/*'];
+      let returnType = 'Boolean';
+      return this.apiClient.callApi(
+        '/user/login', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );

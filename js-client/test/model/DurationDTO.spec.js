@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new Swagger.UserControllerApi();
+    instance = new Swagger.DurationDTO();
   });
 
   var getProperty = function(object, getter, property) {
@@ -47,37 +47,25 @@
       object[property] = value;
   }
 
-  describe('UserControllerApi', function() {
-    describe('checkAuth', function() {
-      it('should call checkAuth successfully', function(done) {
-        //uncomment below and update the code to test checkAuth
-        //instance.checkAuth(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
+  describe('DurationDTO', function() {
+    it('should create an instance of DurationDTO', function() {
+      // uncomment below and update the code to test DurationDTO
+      //var instance = new Swagger.DurationDTO();
+      //expect(instance).to.be.a(Swagger.DurationDTO);
     });
-    describe('testSwagger', function() {
-      it('should call testSwagger successfully', function(done) {
-        //uncomment below and update the code to test testSwagger
-        //instance.testSwagger(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
+
+    it('should have the property startTime (base name: "startTime")', function() {
+      // uncomment below and update the code to test the property startTime
+      //var instance = new Swagger.DurationDTO();
+      //expect(instance).to.be();
     });
-    describe('userLogin', function() {
-      it('should call userLogin successfully', function(done) {
-        //uncomment below and update the code to test userLogin
-        //instance.userLogin(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
+
+    it('should have the property endTime (base name: "endTime")', function() {
+      // uncomment below and update the code to test the property endTime
+      //var instance = new Swagger.DurationDTO();
+      //expect(instance).to.be();
     });
+
   });
 
 }));

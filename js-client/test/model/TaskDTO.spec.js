@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new Swagger.TaskVO();
+    instance = new Swagger.TaskDTO();
   });
 
   var getProperty = function(object, getter, property) {
@@ -47,64 +47,58 @@
       object[property] = value;
   }
 
-  describe('TaskVO', function() {
-    it('should create an instance of TaskVO', function() {
-      // uncomment below and update the code to test TaskVO
-      //var instance = new Swagger.TaskVO();
-      //expect(instance).to.be.a(Swagger.TaskVO);
+  describe('TaskDTO', function() {
+    it('should create an instance of TaskDTO', function() {
+      // uncomment below and update the code to test TaskDTO
+      //var instance = new Swagger.TaskDTO();
+      //expect(instance).to.be.a(Swagger.TaskDTO);
     });
 
-    it('should have the property id (base name: "id")', function() {
-      // uncomment below and update the code to test the property id
-      //var instance = new Swagger.TaskVO();
+    it('should have the property taskId (base name: "taskId")', function() {
+      // uncomment below and update the code to test the property taskId
+      //var instance = new Swagger.TaskDTO();
       //expect(instance).to.be();
     });
 
-    it('should have the property title (base name: "title")', function() {
-      // uncomment below and update the code to test the property title
-      //var instance = new Swagger.TaskVO();
+    it('should have the property userId (base name: "userId")', function() {
+      // uncomment below and update the code to test the property userId
+      //var instance = new Swagger.TaskDTO();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property text (base name: "text")', function() {
+      // uncomment below and update the code to test the property text
+      //var instance = new Swagger.TaskDTO();
       //expect(instance).to.be();
     });
 
     it('should have the property p (base name: "p")', function() {
       // uncomment below and update the code to test the property p
-      //var instance = new Swagger.TaskVO();
+      //var instance = new Swagger.TaskDTO();
       //expect(instance).to.be();
     });
 
     it('should have the property description (base name: "description")', function() {
       // uncomment below and update the code to test the property description
-      //var instance = new Swagger.TaskVO();
+      //var instance = new Swagger.TaskDTO();
       //expect(instance).to.be();
     });
 
-    it('should have the property done (base name: "done")', function() {
-      // uncomment below and update the code to test the property done
-      //var instance = new Swagger.TaskVO();
+    it('should have the property dateTime (base name: "dateTime")', function() {
+      // uncomment below and update the code to test the property dateTime
+      //var instance = new Swagger.TaskDTO();
       //expect(instance).to.be();
     });
 
-    it('should have the property start (base name: "start")', function() {
-      // uncomment below and update the code to test the property start
-      //var instance = new Swagger.TaskVO();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property end (base name: "end")', function() {
-      // uncomment below and update the code to test the property end
-      //var instance = new Swagger.TaskVO();
+    it('should have the property createTime (base name: "createTime")', function() {
+      // uncomment below and update the code to test the property createTime
+      //var instance = new Swagger.TaskDTO();
       //expect(instance).to.be();
     });
 
     it('should have the property tag (base name: "tag")', function() {
       // uncomment below and update the code to test the property tag
-      //var instance = new Swagger.TaskVO();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property backgroundColor (base name: "backgroundColor")', function() {
-      // uncomment below and update the code to test the property backgroundColor
-      //var instance = new Swagger.TaskVO();
+      //var instance = new Swagger.TaskDTO();
       //expect(instance).to.be();
     });
 

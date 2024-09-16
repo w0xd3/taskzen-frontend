@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**addTodo**](TodosControllerApi.md#addTodo) | **PUT** /todos/addTodo | 
 [**changeStatus**](TodosControllerApi.md#changeStatus) | **POST** /todos/ch | 
-[**getTodosById**](TodosControllerApi.md#getTodosById) | **GET** /todos/{id} | getTodosById
+[**getTodosById**](TodosControllerApi.md#getTodosById) | **GET** /todos | getTodosById
 [**removeTodo**](TodosControllerApi.md#removeTodo) | **DELETE** /todos/remove | 
 
 
@@ -99,7 +99,7 @@ No authorization required
 
 ## getTodosById
 
-> [TodoVO] getTodosById(id)
+> [TodoVO] getTodosById()
 
 getTodosById
 
@@ -109,8 +109,7 @@ getTodosById
 import Swagger from '_swagger';
 
 let apiInstance = new Swagger.TodosControllerApi();
-let id = 789; // Number | 
-apiInstance.getTodosById(id, (error, data, response) => {
+apiInstance.getTodosById((error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -121,10 +120,7 @@ apiInstance.getTodosById(id, (error, data, response) => {
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **Number**|  | 
+This endpoint does not need any parameter.
 
 ### Return type
 

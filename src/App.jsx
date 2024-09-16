@@ -1,12 +1,19 @@
-import React from "react";
-import Todo from './pages/Todo'
-import Calendar from "./pages/Calendar";
 import Navbar from './components/Navbar'
+import Login from './pages/Login'
+import UserControllerApi from './js-client/api/UserControllerApi';
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+
 
 function App() {
+
   return (
     <div className="App">
-        <Navbar />
+      <Routes>
+        {/* 未登录时访问 /dashboard，会重定向到 /login */}
+        <Route path="/login" element={<Login />} />
+        <Route path="*" element={<Navbar />} />
+      </Routes>
     </div>
   );
 }

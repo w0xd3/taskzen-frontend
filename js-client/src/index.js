@@ -13,10 +13,14 @@
 
 
 import ApiClient from './ApiClient';
+import DurationDTO from './model/DurationDTO';
 import Task from './model/Task';
+import TaskDTO from './model/TaskDTO';
 import TaskVO from './model/TaskVO';
 import TodoDTO from './model/TodoDTO';
 import TodoVO from './model/TodoVO';
+import UserDTO from './model/UserDTO';
+import InsightsControllerApi from './api/InsightsControllerApi';
 import TaskControllerApi from './api/TaskControllerApi';
 import TodosControllerApi from './api/TodosControllerApi';
 import UserControllerApi from './api/UserControllerApi';
@@ -61,10 +65,22 @@ export {
     ApiClient,
 
     /**
+     * The DurationDTO model constructor.
+     * @property {module:model/DurationDTO}
+     */
+    DurationDTO,
+
+    /**
      * The Task model constructor.
      * @property {module:model/Task}
      */
     Task,
+
+    /**
+     * The TaskDTO model constructor.
+     * @property {module:model/TaskDTO}
+     */
+    TaskDTO,
 
     /**
      * The TaskVO model constructor.
@@ -83,6 +99,18 @@ export {
      * @property {module:model/TodoVO}
      */
     TodoVO,
+
+    /**
+     * The UserDTO model constructor.
+     * @property {module:model/UserDTO}
+     */
+    UserDTO,
+
+    /**
+    * The InsightsControllerApi service constructor.
+    * @property {module:api/InsightsControllerApi}
+    */
+    InsightsControllerApi,
 
     /**
     * The TaskControllerApi service constructor.

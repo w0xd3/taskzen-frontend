@@ -102,16 +102,16 @@ Please follow the [installation](#installation) instruction and execute the foll
 var Swagger = require('_swagger');
 
 
-var api = new Swagger.TaskControllerApi()
-var task = new Swagger.Task(); // {Task} 
+var api = new Swagger.InsightsControllerApi()
+var durationDTO = new Swagger.DurationDTO(); // {DurationDTO} 
 var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
-    console.log('API called successfully.');
+    console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.addTask(task, callback);
+api.getPList(durationDTO, callback);
 
 ```
 
@@ -121,23 +121,34 @@ All URIs are relative to *http://localhost:8080*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*Swagger.InsightsControllerApi* | [**getPList**](docs/InsightsControllerApi.md#getPList) | **POST** /insight/p | 
+*Swagger.InsightsControllerApi* | [**getTagList**](docs/InsightsControllerApi.md#getTagList) | **POST** /insight/tags | 
+*Swagger.InsightsControllerApi* | [**getTaskCompletion**](docs/InsightsControllerApi.md#getTaskCompletion) | **POST** /insight/getTaskCompletion | 
+*Swagger.InsightsControllerApi* | [**getTaskDistribution**](docs/InsightsControllerApi.md#getTaskDistribution) | **POST** /insight/getTaskDistribution | 
+*Swagger.InsightsControllerApi* | [**getTaskTimeSpent**](docs/InsightsControllerApi.md#getTaskTimeSpent) | **POST** /insight/getTaskTimeSpent | 
+*Swagger.InsightsControllerApi* | [**getTaskTrend**](docs/InsightsControllerApi.md#getTaskTrend) | **POST** /insight/getTaskTrend | 
 *Swagger.TaskControllerApi* | [**addTask**](docs/TaskControllerApi.md#addTask) | **PUT** /task | 
 *Swagger.TaskControllerApi* | [**deleteTask**](docs/TaskControllerApi.md#deleteTask) | **DELETE** /task/{taskId} | 
-*Swagger.TaskControllerApi* | [**getTasksById**](docs/TaskControllerApi.md#getTasksById) | **GET** /task/{userId} | 
+*Swagger.TaskControllerApi* | [**getTasksById**](docs/TaskControllerApi.md#getTasksById) | **GET** /task | 
 *Swagger.TaskControllerApi* | [**modifyTask**](docs/TaskControllerApi.md#modifyTask) | **POST** /task | 
 *Swagger.TodosControllerApi* | [**addTodo**](docs/TodosControllerApi.md#addTodo) | **PUT** /todos/addTodo | 
 *Swagger.TodosControllerApi* | [**changeStatus**](docs/TodosControllerApi.md#changeStatus) | **POST** /todos/ch | 
-*Swagger.TodosControllerApi* | [**getTodosById**](docs/TodosControllerApi.md#getTodosById) | **GET** /todos/{id} | getTodosById
+*Swagger.TodosControllerApi* | [**getTodosById**](docs/TodosControllerApi.md#getTodosById) | **GET** /todos | getTodosById
 *Swagger.TodosControllerApi* | [**removeTodo**](docs/TodosControllerApi.md#removeTodo) | **DELETE** /todos/remove | 
+*Swagger.UserControllerApi* | [**checkAuth**](docs/UserControllerApi.md#checkAuth) | **GET** /user/parse | 
 *Swagger.UserControllerApi* | [**testSwagger**](docs/UserControllerApi.md#testSwagger) | **GET** /user/hello | 测试Swagger3注解方法Get
+*Swagger.UserControllerApi* | [**userLogin**](docs/UserControllerApi.md#userLogin) | **POST** /user/login | 
 
 
 ## Documentation for Models
 
+ - [Swagger.DurationDTO](docs/DurationDTO.md)
  - [Swagger.Task](docs/Task.md)
+ - [Swagger.TaskDTO](docs/TaskDTO.md)
  - [Swagger.TaskVO](docs/TaskVO.md)
  - [Swagger.TodoDTO](docs/TodoDTO.md)
  - [Swagger.TodoVO](docs/TodoVO.md)
+ - [Swagger.UserDTO](docs/UserDTO.md)
 
 
 ## Documentation for Authorization

@@ -54,7 +54,7 @@ class ApiClient {
          * @default {}
          */
         this.defaultHeaders = {
-            'User-Agent': 'OpenAPI-Generator/v1/Javascript'
+            'User-Agent': 'OpenAPI-Generator/v1/Javascript',
         };
 
         /**
@@ -77,7 +77,7 @@ class ApiClient {
          * response, and return them in the next request.
          * @default false
          */
-        this.enableCookies = false;
+        this.enableCookies = true;
 
         /*
          * Used to save and return cookies in a node.js (non-browser) setting,

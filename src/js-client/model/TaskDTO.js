@@ -14,18 +14,18 @@
 import ApiClient from '../ApiClient';
 
 /**
- * The Task model module.
- * @module model/Task
+ * The TaskDTO model module.
+ * @module model/TaskDTO
  * @version v1
  */
-class Task {
+class TaskDTO {
     /**
-     * Constructs a new <code>Task</code>.
-     * @alias module:model/Task
+     * Constructs a new <code>TaskDTO</code>.
+     * @alias module:model/TaskDTO
      */
     constructor() { 
         
-        Task.initialize(this);
+        TaskDTO.initialize(this);
     }
 
     /**
@@ -37,15 +37,15 @@ class Task {
     }
 
     /**
-     * Constructs a <code>Task</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>TaskDTO</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/Task} obj Optional instance to populate.
-     * @return {module:model/Task} The populated <code>Task</code> instance.
+     * @param {module:model/TaskDTO} obj Optional instance to populate.
+     * @return {module:model/TaskDTO} The populated <code>TaskDTO</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new Task();
+            obj = obj || new TaskDTO();
 
             if (data.hasOwnProperty('taskId')) {
                 obj['taskId'] = ApiClient.convertToType(data['taskId'], 'Number');
@@ -62,14 +62,8 @@ class Task {
             if (data.hasOwnProperty('description')) {
                 obj['description'] = ApiClient.convertToType(data['description'], 'String');
             }
-            if (data.hasOwnProperty('done')) {
-                obj['done'] = ApiClient.convertToType(data['done'], 'Boolean');
-            }
-            if (data.hasOwnProperty('startTime')) {
-                obj['startTime'] = ApiClient.convertToType(data['startTime'], 'Number');
-            }
-            if (data.hasOwnProperty('endTime')) {
-                obj['endTime'] = ApiClient.convertToType(data['endTime'], 'Number');
+            if (data.hasOwnProperty('dateTime')) {
+                obj['dateTime'] = ApiClient.convertToType(data['dateTime'], ['String']);
             }
             if (data.hasOwnProperty('createTime')) {
                 obj['createTime'] = ApiClient.convertToType(data['createTime'], 'Number');
@@ -77,17 +71,14 @@ class Task {
             if (data.hasOwnProperty('tag')) {
                 obj['tag'] = ApiClient.convertToType(data['tag'], 'String');
             }
-            if (data.hasOwnProperty('backgroundColor')) {
-                obj['backgroundColor'] = ApiClient.convertToType(data['backgroundColor'], 'String');
-            }
         }
         return obj;
     }
 
     /**
-     * Validates the JSON data with respect to <code>Task</code>.
+     * Validates the JSON data with respect to <code>TaskDTO</code>.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>Task</code>.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>TaskDTO</code>.
      */
     static validateJSON(data) {
         // ensure the json data is a string
@@ -102,13 +93,13 @@ class Task {
         if (data['description'] && !(typeof data['description'] === 'string' || data['description'] instanceof String)) {
             throw new Error("Expected the field `description` to be a primitive type in the JSON string but got " + data['description']);
         }
+        // ensure the json data is an array
+        if (!Array.isArray(data['dateTime'])) {
+            throw new Error("Expected the field `dateTime` to be an array in the JSON data but got " + data['dateTime']);
+        }
         // ensure the json data is a string
         if (data['tag'] && !(typeof data['tag'] === 'string' || data['tag'] instanceof String)) {
             throw new Error("Expected the field `tag` to be a primitive type in the JSON string but got " + data['tag']);
-        }
-        // ensure the json data is a string
-        if (data['backgroundColor'] && !(typeof data['backgroundColor'] === 'string' || data['backgroundColor'] instanceof String)) {
-            throw new Error("Expected the field `backgroundColor` to be a primitive type in the JSON string but got " + data['backgroundColor']);
         }
 
         return true;
@@ -122,62 +113,47 @@ class Task {
 /**
  * @member {Number} taskId
  */
-Task.prototype['taskId'] = undefined;
+TaskDTO.prototype['taskId'] = undefined;
 
 /**
  * @member {Number} userId
  */
-Task.prototype['userId'] = undefined;
+TaskDTO.prototype['userId'] = undefined;
 
 /**
  * @member {String} text
  */
-Task.prototype['text'] = undefined;
+TaskDTO.prototype['text'] = undefined;
 
 /**
  * @member {String} p
  */
-Task.prototype['p'] = undefined;
+TaskDTO.prototype['p'] = undefined;
 
 /**
  * @member {String} description
  */
-Task.prototype['description'] = undefined;
+TaskDTO.prototype['description'] = undefined;
 
 /**
- * @member {Boolean} done
+ * @member {Array.<String>} dateTime
  */
-Task.prototype['done'] = undefined;
-
-/**
- * @member {Number} startTime
- */
-Task.prototype['startTime'] = undefined;
-
-/**
- * @member {Number} endTime
- */
-Task.prototype['endTime'] = undefined;
+TaskDTO.prototype['dateTime'] = undefined;
 
 /**
  * @member {Number} createTime
  */
-Task.prototype['createTime'] = undefined;
+TaskDTO.prototype['createTime'] = undefined;
 
 /**
  * @member {String} tag
  */
-Task.prototype['tag'] = undefined;
-
-/**
- * @member {String} backgroundColor
- */
-Task.prototype['backgroundColor'] = undefined;
+TaskDTO.prototype['tag'] = undefined;
 
 
 
 
 
 
-export default Task;
+export default TaskDTO;
 

@@ -114,6 +114,12 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property backgroundColor (base name: "backgroundColor")', function() {
+      // uncomment below and update the code to test the property backgroundColor
+      //var instance = new Swagger.Task();
+      //expect(instance).to.be();
+    });
+
   });
 
 }));

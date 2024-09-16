@@ -14,7 +14,6 @@ export default function Header() {
         textFiled.value = ''
 
         const data = {
-            userId: 1,
             text: text
         }
 

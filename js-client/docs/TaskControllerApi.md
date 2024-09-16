@@ -6,14 +6,14 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**addTask**](TaskControllerApi.md#addTask) | **PUT** /task | 
 [**deleteTask**](TaskControllerApi.md#deleteTask) | **DELETE** /task/{taskId} | 
-[**getTasksById**](TaskControllerApi.md#getTasksById) | **GET** /task/{userId} | 
+[**getTasksById**](TaskControllerApi.md#getTasksById) | **GET** /task | 
 [**modifyTask**](TaskControllerApi.md#modifyTask) | **POST** /task | 
 
 
 
 ## addTask
 
-> addTask(task)
+> addTask(taskDTO)
 
 
 
@@ -23,8 +23,8 @@ Method | HTTP request | Description
 import Swagger from '_swagger';
 
 let apiInstance = new Swagger.TaskControllerApi();
-let task = new Swagger.Task(); // Task | 
-apiInstance.addTask(task, (error, data, response) => {
+let taskDTO = new Swagger.TaskDTO(); // TaskDTO | 
+apiInstance.addTask(taskDTO, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -38,7 +38,7 @@ apiInstance.addTask(task, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **task** | [**Task**](Task.md)|  | 
+ **taskDTO** | [**TaskDTO**](TaskDTO.md)|  | 
 
 ### Return type
 
@@ -99,7 +99,7 @@ No authorization required
 
 ## getTasksById
 
-> [TaskVO] getTasksById(userId)
+> [TaskVO] getTasksById()
 
 
 
@@ -109,8 +109,7 @@ No authorization required
 import Swagger from '_swagger';
 
 let apiInstance = new Swagger.TaskControllerApi();
-let userId = 789; // Number | 
-apiInstance.getTasksById(userId, (error, data, response) => {
+apiInstance.getTasksById((error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -121,10 +120,7 @@ apiInstance.getTasksById(userId, (error, data, response) => {
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **userId** | **Number**|  | 
+This endpoint does not need any parameter.
 
 ### Return type
 

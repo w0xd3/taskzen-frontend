@@ -1,0 +1,34 @@
+.layout {
+    min-height: 100vh;
+  }
+  
+  .header {
+    background: #001529;
+    padding: 0 20px;
+  }
+  
+  .logo {
+    color: white;
+  }
+  
+  .site-layout-content {
+    padding: 50px;
+    text-align: center;
+  }
+  
+  .welcome-container {
+    max-width: 600px;
+    margin: auto auto;
+  }
+  
+  .footer {
+    text-align: center;
+    padding: 20px;
+    background: #f0f2f5;
+  }
+  
+  .footer-content {
+    justify-content: space-between;
+    align-items: center;
+  }
+  

@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new Swagger.UserControllerApi();
+    instance = new Swagger.UserDTO();
   });
 
   var getProperty = function(object, getter, property) {
@@ -47,37 +47,25 @@
       object[property] = value;
   }
 
-  describe('UserControllerApi', function() {
-    describe('checkAuth', function() {
-      it('should call checkAuth successfully', function(done) {
-        //uncomment below and update the code to test checkAuth
-        //instance.checkAuth(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
+  describe('UserDTO', function() {
+    it('should create an instance of UserDTO', function() {
+      // uncomment below and update the code to test UserDTO
+      //var instance = new Swagger.UserDTO();
+      //expect(instance).to.be.a(Swagger.UserDTO);
     });
-    describe('testSwagger', function() {
-      it('should call testSwagger successfully', function(done) {
-        //uncomment below and update the code to test testSwagger
-        //instance.testSwagger(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
+
+    it('should have the property username (base name: "username")', function() {
+      // uncomment below and update the code to test the property username
+      //var instance = new Swagger.UserDTO();
+      //expect(instance).to.be();
     });
-    describe('userLogin', function() {
-      it('should call userLogin successfully', function(done) {
-        //uncomment below and update the code to test userLogin
-        //instance.userLogin(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
+
+    it('should have the property password (base name: "password")', function() {
+      // uncomment below and update the code to test the property password
+      //var instance = new Swagger.UserDTO();
+      //expect(instance).to.be();
     });
+
   });
 
 }));

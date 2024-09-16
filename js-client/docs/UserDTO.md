@@ -1,10 +1,10 @@
-# Swagger.TodoDTO
+# Swagger.UserDTO
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**userId** | **Number** |  | [optional] 
-**text** | **String** |  | [optional] 
+**username** | **String** |  | [optional] 
+**password** | **String** |  | [optional] 
 
 

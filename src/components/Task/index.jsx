@@ -15,7 +15,7 @@ export default function Task(props) {
     }
 
     const onFinish = (value) => {
-        onSubmit({...value,userId:1})
+        onSubmit(value)
         form.resetFields();
     }
 
@@ -72,9 +72,9 @@ export default function Task(props) {
                             ]}
                         >
                             <Select placeholder="请选择标签">
-                                <Option value="study">学习</Option>
-                                <Option value="work">工作</Option>
-                                <Option value="relax">休闲</Option>
+                                <Option value="学习">学习</Option>
+                                <Option value="工作">工作</Option>
+                                <Option value="休闲">休闲</Option>
                             </Select>
                         </Form.Item>
                     </Col>
@@ -90,10 +90,10 @@ export default function Task(props) {
                             ]}
                         >
                             <Select placeholder="选择任务优先级">
-                                <Option value="0">P0</Option>
-                                <Option value="1">P1</Option>
-                                <Option value="2">P2</Option>
-                                <Option value="3">P3</Option>
+                                <Option value="P0">P0</Option>
+                                <Option value="P1">P1</Option>
+                                <Option value="P2">P2</Option>
+                                <Option value="P3">P3</Option>
                             </Select>
                         </Form.Item>
                     </Col>

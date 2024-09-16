@@ -2,6 +2,7 @@ import Calendar from '../../pages/Calendar';
 import Todo from '../../pages/Todo';
 import Insights from '../../pages/Insights';
 import Report from '../../pages/Report';
+import Welcome from '../../pages/Welcome';
 import './index.css';
 
 import React from 'react';
@@ -64,7 +65,7 @@ const Navbar = () => {
         <Layout style={{ padding: '0 24px', minHeight: 280 }}>
           <Content style={{ padding: 24, margin: 0, minHeight: 280 }}>
             <Routes>
-              <Route path="/" element={<Todo />} />
+              <Route path="/" element={<Welcome />} />
               <Route path="/todo" element={<Todo />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/insight" element={<Insights />} />

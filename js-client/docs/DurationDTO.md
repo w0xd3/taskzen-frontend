@@ -1,10 +1,10 @@
-# Swagger.TodoDTO
+# Swagger.DurationDTO
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**userId** | **Number** |  | [optional] 
-**text** | **String** |  | [optional] 
+**startTime** | **String** |  | [optional] 
+**endTime** | **String** |  | [optional] 
 
 

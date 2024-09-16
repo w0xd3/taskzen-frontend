@@ -6,6 +6,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import TaskControllerApi from '../../js-client/api/TaskControllerApi';
 
 import React, { useState, useRef, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { formatDate } from '@fullcalendar/core'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
@@ -23,18 +24,20 @@ export default function Calendar() {
   const [open, setOpen] = useState(false);
   const [isAdd, setIsAdd] = useState(false);
   const [forceUpdate, setForceUpdate] = useState(false);
+  const navigate = useNavigate();
 
   const clickTimeout = useRef(null);
   const clickCount = useRef(0);
 
-  // 重新获取数据
   const fetchTasks = () => {
-    let id = 1;
-    console.log('fetchTasks被调用')
-    apiInstance.getTasksById(id, (error, _, response) => {
+    apiInstance.getTasksById((error, _, response) => {
+      if(response.statusCode === 302){
+        navigate('/login');
+      }
       if (error) {
         console.error(error);
       } else {
+        console.log(response.body)
         SetINITIAL_EVENTS(response.body);
       }
     });
@@ -51,7 +54,6 @@ export default function Calendar() {
 
   // 改变已完成任务颜色
   const componentDidMount = (info) => {
-    console.log('componentDidMount')
     if (info.event.extendedProps.done) {
       info.el.style.backgroundColor = 'gray';
     }
@@ -234,7 +236,7 @@ function SidebarEvent({ event }) {
   const { p, tag } = event.extendedProps
   return (
     <li key={event.id}>
-      {p !== null && <Tag color={colorMap[p]}>P{p}</Tag>}
+      {p !== null && <Tag color={colorMap[p[1]]}>{p}</Tag>}
       {tag && <Tag color="blue">{tag}</Tag>}
       <b>{formatDate(event.start, { year: 'numeric', month: 'short', day: 'numeric' })}</b> {/* 事件开始时间 */}
       <i>{event.title}</i> {/* 事件标题 */}

@@ -123,19 +123,13 @@ export default class TodosControllerApi {
 
     /**
      * getTodosById
-     * @param {Number} id 
      * @param {module:api/TodosControllerApi~getTodosByIdCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link Array.<module:model/TodoVO>}
      */
-    getTodosById(id, callback) {
+    getTodosById(callback) {
       let postBody = null;
-      // verify the required parameter 'id' is set
-      if (id === undefined || id === null) {
-        throw new Error("Missing the required parameter 'id' when calling getTodosById");
-      }
 
       let pathParams = {
-        'id': id
       };
       let queryParams = {
       };
@@ -149,7 +143,7 @@ export default class TodosControllerApi {
       let accepts = ['*/*'];
       let returnType = [TodoVO];
       return this.apiClient.callApi(
-        '/todos/{id}', 'GET',
+        '/todos', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );
