@@ -111,7 +111,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.getPList(durationDTO, callback);
+api.getCompletionXAxis(durationDTO, callback);
 
 ```
 
@@ -121,6 +121,7 @@ All URIs are relative to *http://localhost:8080*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*Swagger.InsightsControllerApi* | [**getCompletionXAxis**](docs/InsightsControllerApi.md#getCompletionXAxis) | **POST** /insight/compXAxis | 
 *Swagger.InsightsControllerApi* | [**getPList**](docs/InsightsControllerApi.md#getPList) | **POST** /insight/p | 
 *Swagger.InsightsControllerApi* | [**getTagList**](docs/InsightsControllerApi.md#getTagList) | **POST** /insight/tags | 
 *Swagger.InsightsControllerApi* | [**getTaskCompletion**](docs/InsightsControllerApi.md#getTaskCompletion) | **POST** /insight/getTaskCompletion | 

@@ -65,9 +65,6 @@ class TaskDTO {
             if (data.hasOwnProperty('dateTime')) {
                 obj['dateTime'] = ApiClient.convertToType(data['dateTime'], ['String']);
             }
-            if (data.hasOwnProperty('createTime')) {
-                obj['createTime'] = ApiClient.convertToType(data['createTime'], 'Number');
-            }
             if (data.hasOwnProperty('tag')) {
                 obj['tag'] = ApiClient.convertToType(data['tag'], 'String');
             }
@@ -139,11 +136,6 @@ TaskDTO.prototype['description'] = undefined;
  * @member {Array.<String>} dateTime
  */
 TaskDTO.prototype['dateTime'] = undefined;
-
-/**
- * @member {Number} createTime
- */
-TaskDTO.prototype['createTime'] = undefined;
 
 /**
  * @member {String} tag

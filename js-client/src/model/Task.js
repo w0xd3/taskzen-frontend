@@ -71,14 +71,17 @@ class Task {
             if (data.hasOwnProperty('endTime')) {
                 obj['endTime'] = ApiClient.convertToType(data['endTime'], 'Number');
             }
-            if (data.hasOwnProperty('createTime')) {
-                obj['createTime'] = ApiClient.convertToType(data['createTime'], 'Number');
-            }
             if (data.hasOwnProperty('tag')) {
                 obj['tag'] = ApiClient.convertToType(data['tag'], 'String');
             }
             if (data.hasOwnProperty('backgroundColor')) {
                 obj['backgroundColor'] = ApiClient.convertToType(data['backgroundColor'], 'String');
+            }
+            if (data.hasOwnProperty('createTime')) {
+                obj['createTime'] = ApiClient.convertToType(data['createTime'], 'Date');
+            }
+            if (data.hasOwnProperty('updateTime')) {
+                obj['updateTime'] = ApiClient.convertToType(data['updateTime'], 'Date');
             }
         }
         return obj;
@@ -160,11 +163,6 @@ Task.prototype['startTime'] = undefined;
 Task.prototype['endTime'] = undefined;
 
 /**
- * @member {Number} createTime
- */
-Task.prototype['createTime'] = undefined;
-
-/**
  * @member {String} tag
  */
 Task.prototype['tag'] = undefined;
@@ -173,6 +171,16 @@ Task.prototype['tag'] = undefined;
  * @member {String} backgroundColor
  */
 Task.prototype['backgroundColor'] = undefined;
+
+/**
+ * @member {Date} createTime
+ */
+Task.prototype['createTime'] = undefined;
+
+/**
+ * @member {Date} updateTime
+ */
+Task.prototype['updateTime'] = undefined;
 
 
 

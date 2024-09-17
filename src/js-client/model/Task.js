@@ -57,7 +57,7 @@ class Task {
                 obj['text'] = ApiClient.convertToType(data['text'], 'String');
             }
             if (data.hasOwnProperty('p')) {
-                obj['p'] = ApiClient.convertToType(data['p'], 'Number');
+                obj['p'] = ApiClient.convertToType(data['p'], 'String');
             }
             if (data.hasOwnProperty('description')) {
                 obj['description'] = ApiClient.convertToType(data['description'], 'String');
@@ -71,11 +71,17 @@ class Task {
             if (data.hasOwnProperty('endTime')) {
                 obj['endTime'] = ApiClient.convertToType(data['endTime'], 'Number');
             }
-            if (data.hasOwnProperty('createTime')) {
-                obj['createTime'] = ApiClient.convertToType(data['createTime'], 'Number');
-            }
             if (data.hasOwnProperty('tag')) {
                 obj['tag'] = ApiClient.convertToType(data['tag'], 'String');
+            }
+            if (data.hasOwnProperty('backgroundColor')) {
+                obj['backgroundColor'] = ApiClient.convertToType(data['backgroundColor'], 'String');
+            }
+            if (data.hasOwnProperty('createTime')) {
+                obj['createTime'] = ApiClient.convertToType(data['createTime'], 'Date');
+            }
+            if (data.hasOwnProperty('updateTime')) {
+                obj['updateTime'] = ApiClient.convertToType(data['updateTime'], 'Date');
             }
         }
         return obj;
@@ -92,12 +98,20 @@ class Task {
             throw new Error("Expected the field `text` to be a primitive type in the JSON string but got " + data['text']);
         }
         // ensure the json data is a string
+        if (data['p'] && !(typeof data['p'] === 'string' || data['p'] instanceof String)) {
+            throw new Error("Expected the field `p` to be a primitive type in the JSON string but got " + data['p']);
+        }
+        // ensure the json data is a string
         if (data['description'] && !(typeof data['description'] === 'string' || data['description'] instanceof String)) {
             throw new Error("Expected the field `description` to be a primitive type in the JSON string but got " + data['description']);
         }
         // ensure the json data is a string
         if (data['tag'] && !(typeof data['tag'] === 'string' || data['tag'] instanceof String)) {
             throw new Error("Expected the field `tag` to be a primitive type in the JSON string but got " + data['tag']);
+        }
+        // ensure the json data is a string
+        if (data['backgroundColor'] && !(typeof data['backgroundColor'] === 'string' || data['backgroundColor'] instanceof String)) {
+            throw new Error("Expected the field `backgroundColor` to be a primitive type in the JSON string but got " + data['backgroundColor']);
         }
 
         return true;
@@ -124,7 +138,7 @@ Task.prototype['userId'] = undefined;
 Task.prototype['text'] = undefined;
 
 /**
- * @member {Number} p
+ * @member {String} p
  */
 Task.prototype['p'] = undefined;
 
@@ -149,14 +163,24 @@ Task.prototype['startTime'] = undefined;
 Task.prototype['endTime'] = undefined;
 
 /**
- * @member {Number} createTime
+ * @member {String} tag
+ */
+Task.prototype['tag'] = undefined;
+
+/**
+ * @member {String} backgroundColor
+ */
+Task.prototype['backgroundColor'] = undefined;
+
+/**
+ * @member {Date} createTime
  */
 Task.prototype['createTime'] = undefined;
 
 /**
- * @member {String} tag
+ * @member {Date} updateTime
  */
-Task.prototype['tag'] = undefined;
+Task.prototype['updateTime'] = undefined;
 
 
 

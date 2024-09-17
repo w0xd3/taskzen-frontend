@@ -12,8 +12,9 @@ Name | Type | Description | Notes
 **done** | **Boolean** |  | [optional] 
 **startTime** | **Number** |  | [optional] 
 **endTime** | **Number** |  | [optional] 
-**createTime** | **Number** |  | [optional] 
 **tag** | **String** |  | [optional] 
 **backgroundColor** | **String** |  | [optional] 
+**createTime** | **Date** |  | [optional] 
+**updateTime** | **Date** |  | [optional] 
 
 

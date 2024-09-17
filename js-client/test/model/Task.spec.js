@@ -102,12 +102,6 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property createTime (base name: "createTime")', function() {
-      // uncomment below and update the code to test the property createTime
-      //var instance = new Swagger.Task();
-      //expect(instance).to.be();
-    });
-
     it('should have the property tag (base name: "tag")', function() {
       // uncomment below and update the code to test the property tag
       //var instance = new Swagger.Task();
@@ -116,6 +110,18 @@
 
     it('should have the property backgroundColor (base name: "backgroundColor")', function() {
       // uncomment below and update the code to test the property backgroundColor
+      //var instance = new Swagger.Task();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property createTime (base name: "createTime")', function() {
+      // uncomment below and update the code to test the property createTime
+      //var instance = new Swagger.Task();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property updateTime (base name: "updateTime")', function() {
+      // uncomment below and update the code to test the property updateTime
       //var instance = new Swagger.Task();
       //expect(instance).to.be();
     });

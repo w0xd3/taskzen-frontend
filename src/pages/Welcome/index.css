@@ -25,6 +25,7 @@
     text-align: center;
     padding: 20px;
     background: #f0f2f5;
+    box-sizing: border-box; /* 确保 padding 在元素的宽度和高度内 */
   }
   
   .footer-content {

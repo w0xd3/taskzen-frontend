@@ -90,12 +90,6 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property createTime (base name: "createTime")', function() {
-      // uncomment below and update the code to test the property createTime
-      //var instance = new Swagger.TaskDTO();
-      //expect(instance).to.be();
-    });
-
     it('should have the property tag (base name: "tag")', function() {
       // uncomment below and update the code to test the property tag
       //var instance = new Swagger.TaskDTO();

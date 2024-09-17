@@ -66,16 +66,14 @@ export default function TaskDistributionPieChart(props) {
     },
     legend: [
       {
-        // 左边的图例，垂直排列
-        orient: 'vertical',   // 垂直排列
-        left: 'left',         // 定位到左边
-        data: leftLegend  // 放置的系列名称
+        orient: 'vertical',   
+        left: 'left',         
+        data: leftLegend 
       },
       {
-        // 右边的图例，垂直排列
-        orient: 'vertical',   // 垂直排列
-        right: 'right',       // 定位到右边
-        data: rightLegend  // 放置的系列名称
+        orient: 'vertical',   
+        right: 'right',      
+        data: rightLegend  
       }
     ],
     series: [
@@ -102,36 +100,14 @@ export default function TaskDistributionPieChart(props) {
           length: 30
         },
         label: {
-          formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
-          backgroundColor: '#F6F8FC',
-          borderColor: '#8C8D8E',
-          borderWidth: 1,
-          borderRadius: 4,
-          rich: {
-            a: {
-              color: '#6E7079',
-              lineHeight: 22,
-              align: 'center'
-            },
-            hr: {
-              borderColor: '#8C8D8E',
-              width: '100%',
-              borderWidth: 1,
-              height: 0
-            },
-            b: {
-              color: '#4C5058',
-              fontSize: 14,
-              fontWeight: 'bold',
-              lineHeight: 33
-            },
-            per: {
-              color: '#fff',
-              backgroundColor: '#4C5058',
-              padding: [3, 4],
-              borderRadius: 4
-            }
-          }
+          show: true,
+          backgroundColor: '#FFFFFF',   
+          borderRadius: 8,              
+          padding: [6, 8],              
+          borderColor: '#FAEBD7',       
+          borderWidth: 0.5,               
+          // color: '#0277BD',             
+          formatter: '{b}: {c} ({d}%)',
         },
         data: tagList
       }
@@ -142,7 +118,7 @@ export default function TaskDistributionPieChart(props) {
     <div>
       <ReactECharts
         option={option}
-        style={{ height: 400, width: '100%' }}
+        style={{ height: 400, width: '100%', marginTop: '5%' }}
       />
     </div>
   );

@@ -35,6 +35,46 @@ export default class InsightsControllerApi {
 
 
     /**
+     * Callback function to receive the result of the getCompletionXAxis operation.
+     * @callback module:api/InsightsControllerApi~getCompletionXAxisCallback
+     * @param {String} error Error message, if any.
+     * @param {Array.<String>} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * @param {module:model/DurationDTO} durationDTO 
+     * @param {module:api/InsightsControllerApi~getCompletionXAxisCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link Array.<String>}
+     */
+    getCompletionXAxis(durationDTO, callback) {
+      let postBody = durationDTO;
+      // verify the required parameter 'durationDTO' is set
+      if (durationDTO === undefined || durationDTO === null) {
+        throw new Error("Missing the required parameter 'durationDTO' when calling getCompletionXAxis");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = [];
+      let contentTypes = ['application/json'];
+      let accepts = ['*/*'];
+      let returnType = ['String'];
+      return this.apiClient.callApi(
+        '/insight/compXAxis', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
      * Callback function to receive the result of the getPList operation.
      * @callback module:api/InsightsControllerApi~getPListCallback
      * @param {String} error Error message, if any.

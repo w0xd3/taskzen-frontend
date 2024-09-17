@@ -1,5 +1,6 @@
 .babelrc
 .gitignore
+.openapi-generator-ignore
 .travis.yml
 README.md
 docs/DurationDTO.md
@@ -29,3 +30,14 @@ src/model/TaskVO.js
 src/model/TodoDTO.js
 src/model/TodoVO.js
 src/model/UserDTO.js
+test/api/InsightsControllerApi.spec.js
+test/api/TaskControllerApi.spec.js
+test/api/TodosControllerApi.spec.js
+test/api/UserControllerApi.spec.js
+test/model/DurationDTO.spec.js
+test/model/Task.spec.js
+test/model/TaskDTO.spec.js
+test/model/TaskVO.spec.js
+test/model/TodoDTO.spec.js
+test/model/TodoVO.spec.js
+test/model/UserDTO.spec.js

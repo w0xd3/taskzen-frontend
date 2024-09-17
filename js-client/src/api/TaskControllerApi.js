@@ -163,7 +163,7 @@ export default class TaskControllerApi {
      * @param {module:api/TaskControllerApi~modifyTaskCallback} callback The callback function, accepting three arguments: error, data, response
      */
     modifyTask(task, callback) {
-      let postBody = null;
+      let postBody = task;
       // verify the required parameter 'task' is set
       if (task === undefined || task === null) {
         throw new Error("Missing the required parameter 'task' when calling modifyTask");
@@ -172,7 +172,6 @@ export default class TaskControllerApi {
       let pathParams = {
       };
       let queryParams = {
-        'task': task
       };
       let headerParams = {
       };
@@ -180,7 +179,7 @@ export default class TaskControllerApi {
       };
 
       let authNames = [];
-      let contentTypes = [];
+      let contentTypes = ['application/json'];
       let accepts = [];
       let returnType = null;
       return this.apiClient.callApi(

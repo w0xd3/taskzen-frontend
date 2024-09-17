@@ -31,13 +31,12 @@ export default function Calendar() {
 
   const fetchTasks = () => {
     apiInstance.getTasksById((error, _, response) => {
-      if(response.statusCode === 302){
+      if (response.statusCode === 302) {
         navigate('/login');
       }
       if (error) {
         console.error(error);
       } else {
-        console.log(response.body)
         SetINITIAL_EVENTS(response.body);
       }
     });
@@ -57,6 +56,7 @@ export default function Calendar() {
     if (info.event.extendedProps.done) {
       info.el.style.backgroundColor = 'gray';
     }
+    info.el.style.borderColor = 'white';
   }
 
   // 处理Task提交事件
@@ -71,7 +71,7 @@ export default function Calendar() {
         }
       })
       setIsAdd(false)
-    }else{ // 修改逻辑
+    } else { // 修改逻辑
       apiInstance.modifyTask(task, (error, _, __) => {
         if (error) {
           console.log(error)
@@ -112,8 +112,6 @@ export default function Calendar() {
     const done = clickInfo.event.extendedProps.done
 
     clickCount.current += 1;
-
-    console.log({ taskId, done: !done })
 
     if (clickTimeout.current) {
       clearTimeout(clickTimeout.current);
@@ -216,7 +214,7 @@ function Sidebar({ currentEvents }) {
         </ul>
       </div>
       <div className='demo-app-sidebar-section'>
-        <h2>所有事件 ({currentEvents.length})</h2> {/* 当前事件总数 */}
+        <h2>所有事件 ({ calcDone(currentEvents) })</h2> {/* 当前事件总数 */}
         <ul>
           {currentEvents.map((event) => (
             <SidebarEvent key={event.id} event={event} /> // 渲染每个事件
@@ -227,19 +225,31 @@ function Sidebar({ currentEvents }) {
   )
 }
 
+const calcDone = (currentEvents) => {
+  return currentEvents.filter(
+    (e) => {
+      const {done} = e.extendedProps
+      if (!done) {
+        return e
+      }
+    }).length
+}
+
 const colorMap = ['#FF4500', '#FF8C00', '#FFD700', '#B0E57C'];
 
 
 // 侧边栏中的事件项组件
 function SidebarEvent({ event }) {
-  // console.log(event.extendedProps)
-  const { p, tag } = event.extendedProps
+  const { p, tag, done } = event.extendedProps
   return (
-    <li key={event.id}>
-      {p !== null && <Tag color={colorMap[p[1]]}>{p}</Tag>}
-      {tag && <Tag color="blue">{tag}</Tag>}
-      <b>{formatDate(event.start, { year: 'numeric', month: 'short', day: 'numeric' })}</b> {/* 事件开始时间 */}
-      <i>{event.title}</i> {/* 事件标题 */}
-    </li>
+    <>
+      {!done && <li key={event.id}>
+        {p !== null && <Tag color={colorMap[p[1]]}>{p}</Tag>}
+        {tag && <Tag color="blue">{tag}</Tag>}
+        <b>{formatDate(event.start, { year: 'numeric', month: 'short', day: 'numeric' })}</b> {/* 事件开始时间 */}
+        <i>{event.title}</i> {/* 事件标题 */}
+      </li>
+      }
+    </>
   )
 }

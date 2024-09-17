@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **p** | **String** |  | [optional] 
 **description** | **String** |  | [optional] 
 **dateTime** | **[String]** |  | [optional] 
-**createTime** | **Number** |  | [optional] 
 **tag** | **String** |  | [optional] 
 
 

@@ -30,7 +30,6 @@ export default function Todos() {
       if (error) {
         console.log(error)
       } else {
-        console.log(response)
         setData(response.body);
       }
     });

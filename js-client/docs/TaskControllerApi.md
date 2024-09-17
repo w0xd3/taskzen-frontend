@@ -163,7 +163,7 @@ apiInstance.modifyTask(task, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **task** | [**Task**](.md)|  | 
+ **task** | [**Task**](Task.md)|  | 
 
 ### Return type
 
@@ -175,6 +175,6 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: Not defined
 

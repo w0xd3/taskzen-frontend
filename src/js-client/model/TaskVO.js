@@ -47,14 +47,14 @@ class TaskVO {
         if (data) {
             obj = obj || new TaskVO();
 
-            if (data.hasOwnProperty('taskId')) {
-                obj['taskId'] = ApiClient.convertToType(data['taskId'], 'Number');
+            if (data.hasOwnProperty('id')) {
+                obj['id'] = ApiClient.convertToType(data['id'], 'Number');
             }
-            if (data.hasOwnProperty('text')) {
-                obj['text'] = ApiClient.convertToType(data['text'], 'String');
+            if (data.hasOwnProperty('title')) {
+                obj['title'] = ApiClient.convertToType(data['title'], 'String');
             }
             if (data.hasOwnProperty('p')) {
-                obj['p'] = ApiClient.convertToType(data['p'], 'Number');
+                obj['p'] = ApiClient.convertToType(data['p'], 'String');
             }
             if (data.hasOwnProperty('description')) {
                 obj['description'] = ApiClient.convertToType(data['description'], 'String');
@@ -62,14 +62,17 @@ class TaskVO {
             if (data.hasOwnProperty('done')) {
                 obj['done'] = ApiClient.convertToType(data['done'], 'Boolean');
             }
-            if (data.hasOwnProperty('startTime')) {
-                obj['startTime'] = ApiClient.convertToType(data['startTime'], 'Number');
+            if (data.hasOwnProperty('start')) {
+                obj['start'] = ApiClient.convertToType(data['start'], 'String');
             }
-            if (data.hasOwnProperty('endTime')) {
-                obj['endTime'] = ApiClient.convertToType(data['endTime'], 'Number');
+            if (data.hasOwnProperty('end')) {
+                obj['end'] = ApiClient.convertToType(data['end'], 'String');
             }
             if (data.hasOwnProperty('tag')) {
                 obj['tag'] = ApiClient.convertToType(data['tag'], 'String');
+            }
+            if (data.hasOwnProperty('backgroundColor')) {
+                obj['backgroundColor'] = ApiClient.convertToType(data['backgroundColor'], 'String');
             }
         }
         return obj;
@@ -82,16 +85,32 @@ class TaskVO {
      */
     static validateJSON(data) {
         // ensure the json data is a string
-        if (data['text'] && !(typeof data['text'] === 'string' || data['text'] instanceof String)) {
-            throw new Error("Expected the field `text` to be a primitive type in the JSON string but got " + data['text']);
+        if (data['title'] && !(typeof data['title'] === 'string' || data['title'] instanceof String)) {
+            throw new Error("Expected the field `title` to be a primitive type in the JSON string but got " + data['title']);
+        }
+        // ensure the json data is a string
+        if (data['p'] && !(typeof data['p'] === 'string' || data['p'] instanceof String)) {
+            throw new Error("Expected the field `p` to be a primitive type in the JSON string but got " + data['p']);
         }
         // ensure the json data is a string
         if (data['description'] && !(typeof data['description'] === 'string' || data['description'] instanceof String)) {
             throw new Error("Expected the field `description` to be a primitive type in the JSON string but got " + data['description']);
         }
         // ensure the json data is a string
+        if (data['start'] && !(typeof data['start'] === 'string' || data['start'] instanceof String)) {
+            throw new Error("Expected the field `start` to be a primitive type in the JSON string but got " + data['start']);
+        }
+        // ensure the json data is a string
+        if (data['end'] && !(typeof data['end'] === 'string' || data['end'] instanceof String)) {
+            throw new Error("Expected the field `end` to be a primitive type in the JSON string but got " + data['end']);
+        }
+        // ensure the json data is a string
         if (data['tag'] && !(typeof data['tag'] === 'string' || data['tag'] instanceof String)) {
             throw new Error("Expected the field `tag` to be a primitive type in the JSON string but got " + data['tag']);
+        }
+        // ensure the json data is a string
+        if (data['backgroundColor'] && !(typeof data['backgroundColor'] === 'string' || data['backgroundColor'] instanceof String)) {
+            throw new Error("Expected the field `backgroundColor` to be a primitive type in the JSON string but got " + data['backgroundColor']);
         }
 
         return true;
@@ -103,17 +122,17 @@ class TaskVO {
 
 
 /**
- * @member {Number} taskId
+ * @member {Number} id
  */
-TaskVO.prototype['taskId'] = undefined;
+TaskVO.prototype['id'] = undefined;
 
 /**
- * @member {String} text
+ * @member {String} title
  */
-TaskVO.prototype['text'] = undefined;
+TaskVO.prototype['title'] = undefined;
 
 /**
- * @member {Number} p
+ * @member {String} p
  */
 TaskVO.prototype['p'] = undefined;
 
@@ -128,19 +147,24 @@ TaskVO.prototype['description'] = undefined;
 TaskVO.prototype['done'] = undefined;
 
 /**
- * @member {Number} startTime
+ * @member {String} start
  */
-TaskVO.prototype['startTime'] = undefined;
+TaskVO.prototype['start'] = undefined;
 
 /**
- * @member {Number} endTime
+ * @member {String} end
  */
-TaskVO.prototype['endTime'] = undefined;
+TaskVO.prototype['end'] = undefined;
 
 /**
  * @member {String} tag
  */
 TaskVO.prototype['tag'] = undefined;
+
+/**
+ * @member {String} backgroundColor
+ */
+TaskVO.prototype['backgroundColor'] = undefined;
 
 
 
