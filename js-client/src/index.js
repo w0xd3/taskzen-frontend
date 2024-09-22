@@ -21,6 +21,7 @@ import TodoDTO from './model/TodoDTO';
 import TodoVO from './model/TodoVO';
 import UserDTO from './model/UserDTO';
 import InsightsControllerApi from './api/InsightsControllerApi';
+import ReportControllerApi from './api/ReportControllerApi';
 import TaskControllerApi from './api/TaskControllerApi';
 import TodosControllerApi from './api/TodosControllerApi';
 import UserControllerApi from './api/UserControllerApi';
@@ -111,6 +112,12 @@ export {
     * @property {module:api/InsightsControllerApi}
     */
     InsightsControllerApi,
+
+    /**
+    * The ReportControllerApi service constructor.
+    * @property {module:api/ReportControllerApi}
+    */
+    ReportControllerApi,
 
     /**
     * The TaskControllerApi service constructor.

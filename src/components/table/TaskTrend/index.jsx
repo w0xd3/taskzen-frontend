@@ -20,7 +20,6 @@ export default function Index(props) {
             if (error) console.log(error)
             else {
                 const data = JSON.parse(response.text)
-                console.log('@getTaskTrend:', data)
                 setDate(data.date)
                 setFinish(data.finish)
                 setCreate(data.create)

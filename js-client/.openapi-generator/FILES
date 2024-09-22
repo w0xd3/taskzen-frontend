@@ -5,6 +5,7 @@
 README.md
 docs/DurationDTO.md
 docs/InsightsControllerApi.md
+docs/ReportControllerApi.md
 docs/Task.md
 docs/TaskControllerApi.md
 docs/TaskDTO.md
@@ -19,6 +20,7 @@ mocha.opts
 package.json
 src/ApiClient.js
 src/api/InsightsControllerApi.js
+src/api/ReportControllerApi.js
 src/api/TaskControllerApi.js
 src/api/TodosControllerApi.js
 src/api/UserControllerApi.js
@@ -31,6 +33,7 @@ src/model/TodoDTO.js
 src/model/TodoVO.js
 src/model/UserDTO.js
 test/api/InsightsControllerApi.spec.js
+test/api/ReportControllerApi.spec.js
 test/api/TaskControllerApi.spec.js
 test/api/TodosControllerApi.spec.js
 test/api/UserControllerApi.spec.js

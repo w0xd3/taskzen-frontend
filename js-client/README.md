@@ -128,6 +128,9 @@ Class | Method | HTTP request | Description
 *Swagger.InsightsControllerApi* | [**getTaskDistribution**](docs/InsightsControllerApi.md#getTaskDistribution) | **POST** /insight/getTaskDistribution | 
 *Swagger.InsightsControllerApi* | [**getTaskTimeSpent**](docs/InsightsControllerApi.md#getTaskTimeSpent) | **POST** /insight/getTaskTimeSpent | 
 *Swagger.InsightsControllerApi* | [**getTaskTrend**](docs/InsightsControllerApi.md#getTaskTrend) | **POST** /insight/getTaskTrend | 
+*Swagger.ReportControllerApi* | [**aISuggestion**](docs/ReportControllerApi.md#aISuggestion) | **POST** /report/aiSuggestion | 
+*Swagger.ReportControllerApi* | [**check**](docs/ReportControllerApi.md#check) | **POST** /report/check | 
+*Swagger.ReportControllerApi* | [**getStatistics**](docs/ReportControllerApi.md#getStatistics) | **POST** /report/getStatistics | 
 *Swagger.TaskControllerApi* | [**addTask**](docs/TaskControllerApi.md#addTask) | **PUT** /task | 
 *Swagger.TaskControllerApi* | [**deleteTask**](docs/TaskControllerApi.md#deleteTask) | **DELETE** /task/{taskId} | 
 *Swagger.TaskControllerApi* | [**getTasksById**](docs/TaskControllerApi.md#getTasksById) | **GET** /task | 

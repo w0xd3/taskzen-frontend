@@ -19,7 +19,6 @@ export default function Index(props) {
         apiInstance.getTaskTimeSpent(duration, (error, _, response) => {
             if (error) console.log(error)
             else {
-                console.log('@getTaskTimeSpent', JSON.parse(response.text))
                 const data = JSON.parse(response.text)
                 setNeed(data.need)
                 setPlan(data.plan)
